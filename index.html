@@ -1,0 +1,1545 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reza Hakim Arafah | Infrastructure Engineer</title>
+    <meta
+      name="description"
+      content="Personal portfolio and infrastructure learning lab of Reza Hakim Arafah, exploring Linux, networking, automation, Docker, and infrastructure engineering."
+    />
+    <meta
+      property="og:title"
+      content="Reza Hakim Arafah | Infrastructure Engineer"
+    />
+    <meta
+      property="og:description"
+      content="Personal portfolio and infrastructure learning lab of Reza Hakim Arafah, exploring Linux, networking, automation, Docker, and infrastructure engineering."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://reezakim.my.id/" />
+    <meta property="og:url" content="https://reezakim.my.id/" />
+    <meta
+      property="og:image"
+      content="https://reezakim.my.id/images/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Reza Hakim Arafah | Infrastructure Engineer"
+    />
+    <meta
+      name="twitter:description"
+      content="Personal portfolio and infrastructure learning lab of Reza Hakim Arafah, exploring Linux, networking, automation, Docker, and infrastructure engineering."
+    />
+    <meta
+      name="twitter:image"
+      content="https://reezakim.my.id/images/og-image.png"
+    />
+    <meta name="theme-color" content="#f5f5f7" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Reza Hakim Arafah",
+        "jobTitle": "Infrastructure Engineer",
+        "url": "https://reezakim.my.id/",
+        "image": "https://reezakim.my.id/images/hero-image1.jpg",
+        "sameAs": [
+          "https://github.com/reezakim",
+          "https://instagram.com/reezakim",
+          "https://linkedin.com/in/rezahakim"
+        ],
+        "knowsAbout": [
+          "Linux Administration",
+          "Networking",
+          "Automation & Scripting",
+          "Docker",
+          "Infrastructure Engineering"
+        ]
+      }
+    </script>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS (compiled static) -->
+    <link rel="stylesheet" href="css/tailwind.css" />
+
+    <!-- macOS-inspired UI Styles -->
+    <style>
+      :root {
+        /* Swiss Technical Report */
+        --paper: #ffffff;
+        --muted: #f7f7f5;
+        --ink: #111111;
+        --accent: #ff3e00;
+        --hairline: rgba(17, 17, 17, 0.16);
+        --mac-red: #ff5f57;
+        --mac-yellow: #febc2e;
+        --mac-green: #28c840;
+        --mac-ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      /* Top bar — Swiss */
+      .mac-nav-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        pointer-events: none;
+        background: rgba(255, 255, 255, 0.96);
+        border-bottom: 1px solid var(--hairline);
+      }
+
+      .mac-nav {
+        pointer-events: auto;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 24px;
+        background: transparent;
+      }
+
+      .mac-nav-link {
+        position: relative;
+        padding: 2px 0;
+        border-radius: 0;
+        color: var(--ink);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .mac-nav-link::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-right: 8px;
+        vertical-align: middle;
+        border-radius: 50%;
+        background: transparent;
+      }
+
+      .mac-nav-link:hover {
+        color: var(--accent);
+      }
+
+      .mac-nav-link.is-active {
+        color: var(--ink);
+      }
+
+      .mac-nav-link.is-active::before {
+        background: var(--accent);
+      }
+
+      .mac-btn {
+        padding: 10px 20px;
+        border-radius: 0;
+        background: var(--paper);
+        border: 1px solid var(--ink);
+        font-weight: 700;
+        color: var(--ink);
+        transition:
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease;
+      }
+
+      .mac-btn:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #ffffff;
+      }
+
+      .mac-btn-primary {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+
+      .mac-btn-primary:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+
+      /* Anchor targets land below fixed navbars */
+      #home,
+      #about,
+      #contact {
+        scroll-margin-top: 88px;
+      }
+      @media (max-width: 1023px) {
+        #home,
+        #about,
+        #contact {
+          scroll-margin-top: 80px;
+        }
+      }
+
+      /* Mobile & tablet menu panel */
+      .glass-nav-mobile {
+        pointer-events: auto;
+        background: var(--paper);
+        border: 1px solid var(--hairline);
+      }
+
+      #mobile-menu-wrap {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition:
+          max-height 0.4s var(--mac-ease),
+          opacity 0.3s ease,
+          transform 0.4s var(--mac-ease);
+      }
+
+      #mobile-menu-wrap.is-open {
+        max-height: 420px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #menu-btn .menu-icon-open {
+        transition: opacity 0.25s var(--mac-ease), transform 0.3s var(--mac-ease);
+      }
+      #menu-btn .menu-icon-close {
+        opacity: 0;
+        transform: rotate(-45deg) scale(0.6);
+        transition: opacity 0.25s var(--mac-ease), transform 0.3s var(--mac-ease);
+      }
+      #menu-btn.is-open .menu-icon-open {
+        opacity: 0;
+        transform: rotate(45deg) scale(0.6);
+      }
+      #menu-btn.is-open .menu-icon-close {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+      }
+
+      /* Spec sheet surfaces */
+      .glass-panel,
+      .glass-card {
+        background: var(--paper);
+        border: 1px solid var(--hairline);
+        border-radius: 0;
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .glass-card:hover {
+        transform: none;
+        background: var(--paper);
+        box-shadow: inset 0 3px 0 var(--accent);
+      }
+
+      .glass-card.tilt-card {
+        transform-style: preserve-3d;
+      }
+
+      .glass-pill {
+        background: transparent;
+        border: 1px solid var(--hairline);
+        box-shadow: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .glass-pill:hover {
+        transform: none;
+        background: transparent;
+        border-color: var(--accent);
+        box-shadow: none;
+      }
+
+      /* Terminal window — the single dark block */
+      .mac-window {
+        background: #101210;
+        border-radius: 0;
+        overflow: hidden;
+        box-shadow: none;
+      }
+
+      .mac-titlebar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        background: #171a16;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .mac-titlebar .font-mono {
+        color: #8f948c !important;
+      }
+
+      .mac-terminal-body {
+        background: transparent;
+      }
+
+      .mac-terminal-body * {
+        color: #d8d8d0 !important;
+      }
+
+      .mac-traffic-lights {
+        display: flex;
+        gap: 8px;
+      }
+
+      .mac-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 0.5px solid rgba(0, 0, 0, 0.08);
+        transition:
+          transform 0.2s var(--mac-ease),
+          filter 0.2s ease;
+        cursor: default;
+      }
+
+      .mac-dot:hover {
+        transform: scale(1.12);
+        filter: brightness(1.05);
+      }
+      .mac-dot--close {
+        background: var(--mac-red);
+      }
+      .mac-dot--minimize {
+        background: var(--mac-yellow);
+      }
+      .mac-dot--maximize {
+        background: var(--mac-green);
+      }
+
+      /* Hero visual cluster */
+      .hero-visual {
+        position: relative;
+        padding: 28px 12px 20px;
+      }
+
+      .hero-photo {
+        position: absolute;
+        z-index: 20;
+        padding: 0;
+        background: transparent;
+        border: 1px solid var(--hairline);
+        border-radius: 0;
+        box-shadow: none;
+        overflow: hidden;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      .hero-photo:hover {
+        transform: translateY(-4px) scale(1.03) !important;
+        box-shadow: 0 32px 70px -18px rgba(0, 0, 0, 0.22);
+        z-index: 30;
+      }
+
+      .hero-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0;
+        background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      }
+
+      /* Top-right — hero-image1.jpg */
+      .hero-photo--tr {
+        top: -12px;
+        right: -28px;
+        width: 112px;
+        height: 112px;
+        transform: rotate(6deg);
+        animation: floatPhotoTR 8s ease-in-out infinite;
+      }
+
+      /* Bottom-left — hero-image2.jpg */
+      .hero-photo--bl {
+        bottom: -20px;
+        left: -36px;
+        width: 128px;
+        height: 128px;
+        transform: rotate(-5deg);
+        animation: floatPhotoBL 9s ease-in-out 0.8s infinite;
+      }
+
+      @keyframes floatPhotoTR {
+        0%,
+        100% {
+          transform: rotate(6deg) translateY(0);
+        }
+        50% {
+          transform: rotate(4deg) translateY(-10px);
+        }
+      }
+
+      @keyframes floatPhotoBL {
+        0%,
+        100% {
+          transform: rotate(-5deg) translateY(0);
+        }
+        50% {
+          transform: rotate(-3deg) translateY(-12px);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .hero-photo--tr {
+          width: 128px;
+          height: 128px;
+          right: -36px;
+          top: -18px;
+        }
+        .hero-photo--bl {
+          width: 148px;
+          height: 148px;
+          left: -48px;
+          bottom: -28px;
+        }
+      }
+
+      @media (max-width: 1023px) {
+        /* Fit hero visual on small screens — no cropping, no overflow */
+        .hero-visual {
+          padding: 20px 8px 16px;
+        }
+        .hero-photo--tr {
+          width: 84px;
+          height: 84px;
+          top: -8px;
+          right: -4px;
+        }
+        .hero-photo--bl {
+          width: 92px;
+          height: 92px;
+          bottom: -10px;
+          left: -4px;
+        }
+        #terminal-body {
+          height: 216px;
+          padding: 14px;
+        }
+      }
+
+      /* Highlight — accent word */
+      .marker {
+        color: var(--accent);
+      }
+
+      /* Logo chip — ink mark */
+      .logo-chip {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--ink);
+        color: #ffffff;
+        font-weight: 700;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+      }
+
+      /* Status line — Swiss mono */
+      .rack-led {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        color: var(--accent);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+      }
+
+      .rack-led-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: ledBlink 1.8s steps(2, start) infinite;
+      }
+
+      @keyframes ledBlink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.25;
+        }
+      }
+
+      .animation-delay-2000 {
+        animation-delay: 2.5s;
+      }
+      .animation-delay-4000 {
+        animation-delay: 5s;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.85s var(--mac-ease),
+          transform 0.85s var(--mac-ease);
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .magnetic-wrap {
+        display: inline-block;
+        transition: transform 0.35s var(--mac-ease);
+      }
+
+      /* Section rhythm — hairline bands */
+      .band-tint::before,
+      .band-white::before,
+      .band-dark::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(50% - 50vw);
+        width: 100vw;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      .band-tint::before {
+        background: var(--muted);
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+      }
+
+      .band-white::before {
+        background: var(--paper);
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+      }
+
+      .band-dark::before {
+        background: #111111;
+      }
+
+      /* Dark footer — text & surface flip */
+      .band-dark {
+        color: #cbd5e1;
+      }
+      .band-dark .text-slate-900 {
+        color: #f1f5f9 !important;
+      }
+      .band-dark .text-slate-600,
+      .band-dark .text-slate-700 {
+        color: #94a3b8 !important;
+      }
+      .band-dark .text-slate-500 {
+        color: #64748b !important;
+      }
+      .band-dark [class*="border-slate"] {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+      }
+      .band-dark .hover\:text-slate-900:hover {
+        color: #f8fafc !important;
+      }
+      .band-dark .glass-pill {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.14);
+        box-shadow: none;
+      }
+      .band-dark .glass-pill:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+
+      /* Learning Lab topic index marks */
+      .topic-orange,
+      .topic-blue,
+      .topic-emerald,
+      .topic-sky {
+        border-top: 3px solid var(--ink);
+      }
+
+      /* Giant section numerals */
+      .sec-no {
+        display: block;
+        margin-bottom: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(3.5rem, 9vw, 6rem);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: var(--paper);
+        -webkit-text-stroke: 1.5px var(--ink);
+      }
+
+      /* Brand accents unified to Swiss red */
+      .text-brand-600 {
+        color: var(--accent) !important;
+      }
+      .bg-brand-500 {
+        background-color: var(--accent) !important;
+      }
+
+      @media (max-width: 1023px) {
+        /* Freeze floating decor on touch layouts */
+        .hero-photo--tr,
+        .hero-photo--bl,
+        .animate-float {
+          animation: none !important;
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .glass-card.tilt-card {
+          will-change: transform;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .mac-nav,
+        .hero-photo--tr,
+        .hero-photo--bl,
+        .animate-float {
+          animation: none !important;
+        }
+        .tilt-card {
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="text-[#1d1d1f] antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white"
+  >
+    <!-- Mobile & Tablet Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 lg:hidden pointer-events-none" id="mobile-nav">
+      <div class="flex flex-col items-center pt-3 px-3">
+        <nav class="glass-nav-mobile rounded-full pl-4 pr-1.5 py-1.5 flex items-center gap-6" id="mobile-nav-bar" aria-label="Mobile navigation">
+          <a href="#home" class="flex items-center gap-2 shrink-0">
+            <div
+              class="logo-chip"
+            >
+              RHA
+            </div>
+            <span class="font-semibold text-[#1d1d1f] tracking-tight text-[15px]"
+              >InfraLab.</span
+            >
+          </a>
+          <button
+            id="menu-btn"
+            type="button"
+            aria-label="Buka menu navigasi"
+            aria-controls="mobile-menu-wrap"
+            aria-expanded="false"
+            class="relative w-9 h-9 flex items-center justify-center rounded-full glass-pill text-slate-800"
+          >
+            <svg class="menu-icon-open absolute w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+            <svg class="menu-icon-close absolute w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+        </nav>
+        <div id="mobile-menu-wrap">
+          <div
+            class="glass-nav-mobile mt-2 rounded-2xl px-5 py-3 w-72 flex flex-col gap-1 text-[15px]"
+          >
+            <a href="#home" class="mac-nav-link" data-nav="home">Home</a>
+            <a href="#about" class="mac-nav-link" data-nav="about">About</a>
+            <a href="coming-soon.html?from=learning-lab" class="mac-nav-link"
+              >Learning Lab</a
+            >
+            <a href="coming-soon.html?from=projects" class="mac-nav-link"
+              >Projects</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Desktop top navigation -->
+    <header class="mac-nav-wrapper hidden lg:block" id="mac-nav-wrapper">
+      <nav class="mac-nav" id="mac-nav" aria-label="Main navigation">
+        <a href="#home" class="flex items-center gap-2.5 group shrink-0">
+            <div
+              class="logo-chip"
+            >
+              RHA
+            </div>
+            <span
+              class="font-semibold text-[#1d1d1f] tracking-tight text-[15px] group-hover:text-brand-600 transition-colors"
+              >InfraLab.</span
+            >
+        </a>
+        <div class="flex items-center gap-0.5 text-[13px]">
+          <a href="#home" class="mac-nav-link" data-nav="home">Home</a>
+          <a href="#about" class="mac-nav-link" data-nav="about">About</a>
+          <a href="coming-soon.html?from=learning-lab" class="mac-nav-link"
+            >Learning Lab</a
+          >
+          <a href="coming-soon.html?from=projects" class="mac-nav-link"
+            >Projects</a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <main
+      class="relative max-w-7xl mx-auto px-6 pt-28 lg:pt-24 pb-20 min-h-screen flex flex-col justify-center"
+    >
+      <div class="grid lg:grid-cols-12 gap-12 items-center" id="home">
+        <!-- Hero Text -->
+        <div
+          class="lg:col-span-7 flex flex-col items-start z-10 animate-fade-in-up"
+        >
+          <h1
+            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.12]"
+          >
+            Reza Hakim Arafah <br />
+            <span class="marker">Infrastructure Engineer</span>
+          </h1>
+
+          <p
+            class="text-slate-700 text-lg leading-relaxed max-w-xl mb-8 font-medium"
+          >
+            Personal portfolio &amp; infrastructure learning lab yang
+            mengeksplorasi manajemen server Linux, networking, otomasi, Docker,
+            dan arsitektur sistem secara praktis.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-3 mb-8">
+            <span class="magnetic-wrap" data-magnetic>
+              <a
+                href="coming-soon.html?from=learning-lab"
+                class="mac-btn mac-btn-primary group inline-flex items-center justify-center rounded-[14px] px-7 py-3.5 text-sm font-semibold active:scale-[0.98] overflow-hidden relative"
+              >
+                Explore Learning Lab
+                <svg
+                  class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </a>
+            </span>
+            <span class="magnetic-wrap" data-magnetic>
+              <a
+                href="#contact"
+                class="mac-btn inline-flex items-center justify-center rounded-[14px] px-7 py-3.5 text-sm font-semibold active:scale-[0.98]"
+              >
+                Contact Me
+              </a>
+            </span>
+          </div>
+
+          <!-- Hero Socials -->
+          <div
+            class="flex items-center gap-3 font-medium text-sm text-slate-700 mb-8"
+          >
+            <a
+              href="https://github.com/reezakim"
+              target="_blank"
+              rel="noopener"
+              class="glass-pill inline-flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition-all shadow-sm"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.26 9.28 7.77 10.78.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.16.69-3.83-1.34-3.83-1.34-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.52-.29-5.17-1.26-5.17-5.61 0-1.24.44-2.25 1.17-3.04-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.15 1.16a10.9 10.9 0 0 1 5.74 0c2.19-1.47 3.15-1.16 3.15-1.16.62 1.57.23 2.73.11 3.02.73.79 1.17 1.8 1.17 3.04 0 4.36-2.66 5.31-5.19 5.6.41.35.77 1.04.77 2.11 0 1.52-.01 2.75-.01 3.12 0 .3.2.66.79.55 4.5-1.5 7.76-5.76 7.76-10.78C23.02 5.24 18.27.5 12 .5Z"
+                />
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://instagram.com/reezakim"
+              target="_blank"
+              rel="noopener"
+              class="glass-pill inline-flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition-all shadow-sm"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+                <circle cx="12" cy="12" r="4.3" />
+                <circle
+                  cx="17.4"
+                  cy="6.6"
+                  r="1.1"
+                  fill="currentColor"
+                  stroke="none"
+                />
+              </svg>
+              <span>Instagram</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/rezahakim"
+              target="_blank"
+              rel="noopener"
+              class="glass-pill inline-flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-white hover:text-slate-900 transition-all shadow-sm"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M4.98 3.5C4.98 4.88 3.9 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 8.5h4V23h-4V8.5Zm7.5 0h3.83v1.98h.05c.53-1 1.85-2.06 3.8-2.06 4.07 0 4.82 2.68 4.82 6.16V23h-4v-6.65c0-1.59-.03-3.63-2.21-3.63-2.22 0-2.56 1.73-2.56 3.52V23h-4V8.5Z"
+                />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+
+          <!-- Session Status Panel -->
+          <div class="glass-panel rounded-2xl p-4 w-full max-w-lg">
+            <div
+              class="flex items-center gap-2 mb-3 pb-2 border-b border-white/60"
+            >
+              <span
+                class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"
+              ></span>
+              <span
+                class="font-mono text-xs font-semibold tracking-wider text-slate-700 uppercase"
+                >Session Status</span
+              >
+            </div>
+            <dl class="grid grid-cols-2 gap-y-2 text-xs">
+              <div>
+                <dt class="text-slate-600 font-medium">Status</dt>
+                <dd class="font-bold text-slate-900">Learning in public</dd>
+              </div>
+              <div>
+                <dt class="text-slate-600 font-medium">Focus</dt>
+                <dd class="font-bold text-slate-900">
+                  Linux · Docker · Python
+                </dd>
+              </div>
+              <div>
+                <dt class="text-slate-600 font-medium">Base</dt>
+                <dd class="font-bold text-slate-900">Bandung, ID</dd>
+              </div>
+              <div>
+                <dt class="text-slate-600 font-medium">Mode</dt>
+                <dd class="font-bold text-slate-900">Infra lab — active</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- Hero Visual: floating photos + macOS terminal window -->
+        <div
+          class="lg:col-span-5 relative z-10 w-full hero-visual"
+          id="hero-visual"
+        >
+          <!-- Photo 1 — top-right edge (add images/hero-image1.jpg) -->
+          <figure
+            class="hero-photo hero-photo--tr"
+            aria-label="Reza Hakim Arafah"
+          >
+            <img
+              src="images/hero-image1.jpg"
+              alt="Reza Hakim Arafah"
+              width="128"
+              height="128"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </figure>
+
+          <div class="mac-window animate-float tilt-card" id="hero-terminal">
+            <div class="mac-titlebar">
+              <div class="mac-traffic-lights" aria-hidden="true">
+                <span class="mac-dot mac-dot--close" title="Close"></span>
+                <span class="mac-dot mac-dot--minimize" title="Minimize"></span>
+                <span class="mac-dot mac-dot--maximize" title="Maximize"></span>
+              </div>
+              <div
+                class="font-mono text-[11px] font-medium text-[#86868b] tracking-wide"
+              >
+                root@infralab — zsh
+              </div>
+              <div class="w-[52px]"></div>
+            </div>
+            <div
+              class="p-5 font-mono text-[11px] leading-relaxed text-[#1d1d1f] h-72 mac-terminal-body overflow-hidden"
+              id="terminal-body"
+            >
+              <div class="text-[#007aff] font-semibold mb-1">
+                Welcome to InfraLab Interactive Shell v2.0
+              </div>
+              <div class="text-[#86868b] mb-3">
+                Initializing system lab environment... [OK]
+              </div>
+              <div id="typewriter"></div>
+            </div>
+          </div>
+
+          <!-- Photo 2 — bottom-left edge (add images/hero-image2.jpg) -->
+          <figure
+            class="hero-photo hero-photo--bl"
+            aria-label="Reza Hakim Arafah"
+          >
+            <img
+              src="images/hero-image2.jpg"
+              alt="Reza Hakim Arafah"
+              width="148"
+              height="148"
+              loading="eager"
+              decoding="async"
+              fetchpriority="low"
+            />
+          </figure>
+        </div>
+      </div>
+    </main>
+
+    <!-- About Section (Redesigned with Distinct Glass Cards for Each Topic) -->
+    <section id="about" class="band-tint max-w-7xl mx-auto px-6 py-20 relative z-10">
+      <!-- Section Header -->
+      <div class="mb-12 reveal">
+        <span class="sec-no">01</span>
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-brand-600 text-xs font-mono font-bold tracking-wider mb-3"
+        >
+          <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+          ABOUT ME
+        </div>
+        <h2
+          class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+        >
+          Background &amp; Expertise
+        </h2>
+        <p class="text-slate-600 max-w-2xl text-base font-medium">
+          Mengenal latar belakang, cara kerja, dan fokus teknologi yang
+          dipelajari di Infra Learning Lab.
+        </p>
+      </div>
+
+      <!-- Background Main Card -->
+      <div
+        class="glass-card rounded-3xl p-8 mb-12 reveal tilt-card border-l-4 border-l-brand-500"
+      >
+        <div
+          class="flex flex-col md:flex-row md:items-center justify-between gap-6"
+        >
+          <div>
+            <span
+              class="text-xs font-mono font-bold text-brand-600 uppercase tracking-wider block mb-2"
+              >Education &amp; Origin</span
+            >
+            <h3 class="text-2xl font-bold text-slate-900 mb-3">
+              Latar Belakang
+            </h3>
+            <p class="text-slate-700 text-base leading-relaxed max-w-3xl">
+              Saya memiliki latar belakang pendidikan
+              <strong class="text-slate-900 font-semibold"
+                >Teknik Komputer &amp; Jaringan (TKJ)</strong
+              >
+              dan saat ini sedang melanjutkan studi
+              <strong class="text-slate-900 font-semibold">Informatika</strong>.
+              Pengalaman praktis di bidang jaringan mendorong passion saya dalam
+              mendalami Linux, arsitektur server, otomasi, dan
+              <strong class="text-slate-900 font-semibold"
+                >infrastructure engineering</strong
+              >.
+            </p>
+          </div>
+          <div class="flex flex-wrap md:flex-col gap-2.5 flex-shrink-0">
+            <span
+              class="glass-pill px-4 py-2 rounded-xl text-xs font-mono font-bold text-slate-800 flex items-center gap-2"
+            >
+              <span class="w-2 h-2 rounded-full bg-cyan-500"></span> Network Engineer
+            </span>
+            <span
+              class="glass-pill px-4 py-2 rounded-xl text-xs font-mono font-bold text-slate-800 flex items-center gap-2"
+            >
+              <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+              Informatics Student
+            </span>
+            <span
+              class="glass-pill px-4 py-2 rounded-xl text-xs font-mono font-bold text-slate-800 flex items-center gap-2"
+            >
+              <span class="w-2 h-2 rounded-full bg-purple-500"></span> Infra
+              Enthusiast
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subsection 1: How I Work (3 Distinct Modular Cards) -->
+      <div class="mb-14">
+        <div class="mb-6 reveal">
+          <h3
+            class="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2"
+          >
+            <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+            How I Work &amp; Principles
+          </h3>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Principle Card 1 -->
+          <div
+            class="glass-card rounded-3xl p-7 reveal tilt-card flex flex-col justify-between"
+          >
+            <div>
+              <div
+                class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-mono font-bold text-lg mb-5 shadow-lg shadow-blue-500/20"
+              >
+                01
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 mb-2">
+                Understand Fundamentals First
+              </h4>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Saya lebih suka memahami bagaimana sebuah sistem bekerja di
+                tingkat bawah (under the hood) sebelum mengandalkan tools atau
+                otomasi serba instan.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-white/60">
+              <span class="text-xs font-mono font-semibold text-blue-600"
+                >#FirstPrinciples</span
+              >
+            </div>
+          </div>
+
+          <!-- Principle Card 2 -->
+          <div
+            class="glass-card rounded-3xl p-7 reveal tilt-card flex flex-col justify-between"
+            style="transition-delay: 100ms"
+          >
+            <div>
+              <div
+                class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-mono font-bold text-lg mb-5 shadow-lg shadow-cyan-500/20"
+              >
+                02
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 mb-2">
+                Structured Troubleshooting
+              </h4>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Ketika menemukan masalah, saya terbiasa memecahnya menjadi
+                bagian-bagian kecil, mendiagnosis akar masalahnya, lalu menguji
+                solusinya secara bertahap.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-white/60">
+              <span class="text-xs font-mono font-semibold text-cyan-600"
+                >#IterativeTesting</span
+              >
+            </div>
+          </div>
+
+          <!-- Principle Card 3 -->
+          <div
+            class="glass-card rounded-3xl p-7 reveal tilt-card flex flex-col justify-between"
+            style="transition-delay: 200ms"
+          >
+            <div>
+              <div
+                class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white font-mono font-bold text-lg mb-5 shadow-lg shadow-teal-500/20"
+              >
+                03
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 mb-2">
+                Living Documentation
+              </h4>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Mendokumentasikan setiap proses &amp; temuan agar di kemudian
+                hari suatu pekerjaan dapat direplikasi tanpa harus mengulangnya
+                dari nol.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-white/60">
+              <span class="text-xs font-mono font-semibold text-teal-600"
+                >#DocumentOrItDidntHappen</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subsection 2: Current Focus & Tech Stack (Separate Dedicated Cards for Each Tech Domain) -->
+      <div class="mb-14">
+        <div class="mb-6 reveal">
+          <h3
+            class="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2"
+          >
+            <span class="w-3 h-3 rounded-full bg-purple-500"></span>
+            Current Focus &amp; Tech Stack
+          </h3>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Stack Card 1: Linux -->
+          <div class="topic-orange glass-card rounded-3xl p-6 reveal tilt-card">
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-600 font-bold font-mono text-sm"
+              >
+                <img
+                  src="images/logo/linux.png"
+                  alt="Linux"
+                  class="w-6 h-6 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-base">
+                  Linux Administration
+                </h4>
+                <span class="text-[11px] font-mono text-slate-500"
+                  >Core OS &amp; Hardening</span
+                >
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >Linux Foundation</span
+              >
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >Web Server (Nginx)</span
+              >
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >Server Hardening</span
+              >
+            </div>
+          </div>
+
+          <!-- Stack Card 2: Networking -->
+          <div
+            class="topic-blue glass-card rounded-3xl p-6 reveal tilt-card"
+            style="transition-delay: 100ms"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-600 font-bold font-mono text-sm"
+              >
+                <img
+                  src="images/logo/network.png"
+                  alt="Networking"
+                  class="w-6 h-6 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-base">Networking</h4>
+                <span class="text-[11px] font-mono text-slate-500"
+                  >Protocols &amp; Routing</span
+                >
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >TCP/IP Stack</span
+              >
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >DNS Architecture</span
+              >
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >Routing &amp; Net-tools</span
+              >
+            </div>
+          </div>
+
+          <!-- Stack Card 3: Automation & Python -->
+          <div
+            class="topic-emerald glass-card rounded-3xl p-6 reveal tilt-card"
+            style="transition-delay: 200ms"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-600 font-bold font-mono text-sm"
+              >
+                <img
+                  src="images/logo/automation.png"
+                  alt="Automation"
+                  class="w-6 h-6 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-base">
+                  Automation &amp; Scripting
+                </h4>
+                <span class="text-[11px] font-mono text-slate-500"
+                  >Bash &amp; Python</span
+                >
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >Bash Shell Scripting</span
+              >
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >Python Automation</span
+              >
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >System Monitoring</span
+              >
+            </div>
+          </div>
+
+          <!-- Stack Card 4: Docker & Containers -->
+          <div
+            class="topic-sky glass-card rounded-3xl p-6 reveal tilt-card"
+            style="transition-delay: 300ms"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-600 font-bold font-mono text-sm"
+              >
+                <img
+                  src="images/logo/containerization.png"
+                  alt="Containerization"
+                  class="w-6 h-6 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-base">
+                  Containerization
+                </h4>
+                <span class="text-[11px] font-mono text-slate-500"
+                  >Docker &amp; Virtualization</span
+                >
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >Docker Containers</span
+              >
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >Docker Compose</span
+              >
+              <span
+                class="glass-pill px-3 py-1 rounded-lg text-xs font-medium text-slate-700"
+                >VMware Hypervisor</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subsection 3: Trajectory & Future Direction Card -->
+      <div
+        class="glass-card rounded-3xl p-8 reveal tilt-card border-l-4 border-l-emerald-500"
+      >
+        <div
+          class="flex flex-col md:flex-row md:items-center justify-between gap-6"
+        >
+          <div>
+            <span
+              class="text-xs font-mono font-bold text-emerald-600 uppercase tracking-wider block mb-2"
+              >Long-term Vision</span
+            >
+            <h3 class="text-2xl font-bold text-slate-900 mb-3">
+              Future Direction
+            </h3>
+            <p class="text-slate-700 text-base leading-relaxed max-w-3xl">
+              Saya ingin berkembang menjadi
+              <strong class="text-slate-900 font-semibold"
+                >Infrastructure Engineer</strong
+              >
+              yang mampu merancang, mengoperasikan, mengotomasi, dan memelihara
+              sistem yang <em>reliable</em>, <em>scalable</em>, dan
+              <em>secure</em>.
+              <strong class="text-slate-900 font-semibold"
+                >Infra Learning Lab</strong
+              >
+              menjadi wadah dokumentasi proses tersebut melalui eksperimen
+              praktis, project, dan pembelajaran berkelanjutan.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <span
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 font-mono font-bold text-xs"
+            >
+              <span
+                class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"
+              ></span>
+              Reliable &amp; Secure Infrastructure
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Lab Section -->
+    <section
+      id="learning-lab"
+      class="band-white max-w-7xl mx-auto px-6 py-20 relative z-10"
+    >
+      <div class="mb-12 reveal">
+        <span class="sec-no">02</span>
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-brand-600 text-xs font-mono font-bold tracking-wider mb-3"
+        >
+          <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+          LEARNING LAB
+        </div>
+        <h2
+          class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+        >
+          Learning Lab
+        </h2>
+        <p class="text-slate-600 max-w-2xl text-base font-medium">
+          Ruang eksperimen dan dokumentasi praktis administrasi server,
+          jaringan, dan otomasi infrastruktur secara terstruktur.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Linux Lab Module Card -->
+        <div
+          class="glass-card rounded-3xl p-8 reveal tilt-card flex flex-col justify-between"
+        >
+          <div>
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 flex items-center justify-center mb-6 shadow-lg shadow-cyan-500/30"
+            >
+              <svg
+                class="w-7 h-7 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+                />
+              </svg>
+            </div>
+            <span
+              class="glass-pill px-3 py-1 rounded-lg text-cyan-800 font-mono text-xs font-semibold mb-3 inline-block"
+              >Lab module</span
+            >
+            <h3 class="text-2xl font-bold text-slate-900 mb-3">Linux</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+              Praktik langsung administrasi Linux, manajemen server, hardening,
+              dan troubleshooting sistem secara bertahap.
+            </p>
+          </div>
+          <div>
+            <a
+              href="coming-soon.html?from=linux"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-md group"
+            >
+              Explore Linux Lab
+              <svg
+                class="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="band-tint max-w-7xl mx-auto px-6 py-20 relative z-10">
+      <div class="mb-12 reveal">
+        <span class="sec-no">03</span>
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-brand-600 text-xs font-mono font-bold tracking-wider mb-3"
+        >
+          <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+          PROJECTS
+        </div>
+        <h2
+          class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+        >
+          Projects
+        </h2>
+        <p class="text-slate-600 max-w-2xl text-base font-medium">
+          Project dan perkakas pendukung otomatisasi infrastruktur yang
+          dikembangkan.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Healthcheck Card -->
+        <div
+          class="glass-card rounded-3xl p-8 reveal tilt-card flex flex-col justify-between"
+        >
+          <div>
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-6 shadow-lg shadow-amber-500/30"
+            >
+              <svg
+                class="w-7 h-7 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <span
+              class="glass-pill px-3 py-1 rounded-lg text-amber-800 font-mono text-xs font-semibold mb-3 inline-block"
+              >Tool</span
+            >
+            <h3 class="text-2xl font-bold text-slate-900 mb-3">Healthcheck</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+              Perkakas monitoring dan validasi kesehatan server &amp; layanan
+              secara otomatis.
+            </p>
+          </div>
+          <div>
+            <a
+              href="coming-soon.html?from=healthcheck"
+              class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-200/80 text-slate-700 font-mono text-xs font-semibold hover:bg-slate-300/80 transition-colors"
+            >
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              Coming Soon
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer
+      id="contact"
+      class="band-dark relative z-10"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8"
+      >
+        <div>
+          <span class="rack-led">
+            <span class="rack-led-dot"></span>
+            ALL SYSTEMS ONLINE
+          </span>
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-1">
+            Infra Learning Lab
+          </h2>
+          <p class="text-slate-600 font-medium text-sm">Reza Hakim Arafah</p>
+        </div>
+
+        <div
+          class="flex flex-wrap gap-3 text-xs font-mono font-semibold text-slate-700"
+        >
+          <span class="glass-pill px-4 py-2 rounded-xl"
+            >Informatics Student</span
+          >
+          <span class="glass-pill px-4 py-2 rounded-xl">Network Engineer</span>
+          <span class="glass-pill px-4 py-2 rounded-xl">DevOps Engineer</span>
+        </div>
+      </div>
+      <div class="border-t border-slate-200/60 py-6">
+        <div
+          class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500"
+        >
+          <p>© 2026 Infra Learning Lab. Designed with macOS-inspired UI.</p>
+          <div class="flex gap-6 font-medium">
+            <a
+              href="https://github.com/reezakim"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-slate-900 transition-colors"
+              >GitHub</a
+            >
+            <a
+              href="https://instagram.com/reezakim"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-slate-900 transition-colors"
+              >Instagram</a
+            >
+            <a
+              href="https://linkedin.com/in/rezahakim"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-slate-900 transition-colors"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script src="js/main.js" defer></script>
+  </body>
+</html>

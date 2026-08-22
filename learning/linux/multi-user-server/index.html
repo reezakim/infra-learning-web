@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-User Server Administration | Linux Lab | Reza Hakim Arafah</title>
+    <meta
+      name="description"
+      content="Dokumentasi lab: konfigurasi server Linux multi-user dengan isolasi hak akses, sudoers policy, dan direktori kolaborasi terproteksi."
+    />
+    <meta
+      property="og:title"
+      content="Multi-User Server Administration | Reza Hakim Arafah"
+    />
+    <meta
+      property="og:description"
+      content="Dokumentasi praktik eksperimen membangun dan mengelola server multi-user yang aman."
+    />
+    <meta property="og:type" content="website" />
+    <link
+      rel="canonical"
+      href="https://reezakim.my.id/learning/linux/multi-user-server/"
+    />
+    <meta
+      property="og:url"
+      content="https://reezakim.my.id/learning/linux/multi-user-server/"
+    />
+    <meta
+      property="og:image"
+      content="https://reezakim.my.id/images/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Multi-User Server Administration | Reza Hakim Arafah"
+    />
+    <meta
+      name="twitter:description"
+      content="Dokumentasi praktik eksperimen membangun dan mengelola server multi-user yang aman."
+    />
+    <meta
+      name="twitter:image"
+      content="https://reezakim.my.id/images/og-image.png"
+    />
+    <meta name="theme-color" content="#f5f5f7" />
+    <link rel="icon" href="../../../images/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS (compiled static) -->
+    <link rel="stylesheet" href="../../../css/tailwind.css" />
+
+    <!-- Authentic Glassmorphism CSS Styles -->
+    <style>
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.42);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        box-shadow: 
+          inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+          0 20px 40px -15px rgba(12, 74, 110, 0.07);
+      }
+      
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.42);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        box-shadow: 
+          inset 0 1px 1px 0 rgba(255, 255, 255, 0.85),
+          0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .glass-pill {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(135deg, #0c4a6e 0%, #0284c7 50%, #4f46e5 100%);
+      }
+      
+      .animation-delay-2000 { animation-delay: 2.5s; }
+      .animation-delay-4000 { animation-delay: 5s; }
+      
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+</head>
+<body class="bg-[#f1f5f9] text-slate-800 antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <!-- High-Contrast Vibrant Animated Glass Mesh Background -->
+    <div class="fixed inset-0 z-[-1] w-full h-full overflow-hidden pointer-events-none" aria-hidden="true">
+        <div class="absolute top-[-5%] left-[-5%] w-[600px] h-[600px] bg-pink-400/50 rounded-full mix-blend-multiply filter blur-[56px] animate-blob"></div>
+        <div class="absolute top-[30%] right-[-5%] w-[550px] h-[550px] bg-cyan-400/50 rounded-full mix-blend-multiply filter blur-[56px] animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[650px] h-[650px] bg-purple-400/45 rounded-full mix-blend-multiply filter blur-[64px] animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../../../index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 text-white font-bold font-mono text-lg group-hover:scale-105 transition-transform">
+                    RHA
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-brand-600 transition-colors leading-none">InfraLab.</span>
+                    <span class="text-[10px] font-mono text-slate-600 font-medium mt-0.5">Reza Hakim Arafah</span>
+                </div>
+            </a>
+            <div class="hidden md:flex gap-8 items-center font-semibold text-sm text-slate-600">
+                <a href="../../../index.html" class="hover:text-brand-600 transition-colors">Home</a>
+                <a href="../../../index.html#about" class="hover:text-brand-600 transition-colors">About</a>
+                <a href="../../../index.html#learning-lab" class="hover:text-brand-600 transition-colors">Learning Lab</a>
+                <a href="../../../index.html#projects" class="hover:text-brand-600 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-brand-600 transition-colors">Contact</a>
+            </div>
+            <a href="../../../index.html#contact" class="glass-pill px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-900 hover:bg-white transition-all">
+                Contact Me
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="relative max-w-5xl mx-auto px-6 pt-32 pb-20 min-h-screen">
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="Breadcrumb" class="mb-8 animate-fade-in-up">
+            <ol class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-600">
+                <li><a href="../../../index.html" class="glass-pill px-3.5 py-1.5 rounded-xl hover:bg-white transition-colors">Home</a></li>
+                <li class="text-slate-400">/</li>
+                <li><a href="../../../index.html#learning-lab" class="glass-pill px-3.5 py-1.5 rounded-xl hover:bg-white transition-colors">Learning Lab</a></li>
+                <li class="text-slate-400">/</li>
+                <li><a href="../index.html" class="glass-pill px-3.5 py-1.5 rounded-xl hover:bg-white transition-colors">Linux</a></li>
+                <li class="text-slate-400">/</li>
+                <li aria-current="page" class="glass-pill px-3.5 py-1.5 rounded-xl text-pink-600 font-bold border-pink-200">Multi-User Server</li>
+            </ol>
+        </nav>
+
+        <!-- Lab Hero -->
+        <section id="lab-hero" class="mb-12 animate-fade-in-up">
+            <div class="glass-panel rounded-3xl p-8 lg:p-10 relative overflow-hidden border-l-4 border-l-pink-500">
+                <div class="inline-flex items-center gap-2 rounded-full glass-pill px-4 py-1.5 font-mono text-xs font-bold text-pink-700 shadow-sm mb-4">
+                    <span class="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></span>
+                    ACTIVE LAB
+                </div>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
+                    Multi-User Server <span class="text-gradient">Administration</span>
+                </h1>
+                <p class="text-slate-700 text-base md:text-lg leading-relaxed font-medium max-w-3xl">
+                    Dokumentasi praktik eksperimen membangun dan mengelola server multi-user yang aman.
+                </p>
+            </div>
+        </section>
+
+        <!-- Lab Article Container -->
+        <article class="space-y-8 relative z-10">
+
+            <!-- 1. Objective -->
+            <section id="objective" class="glass-panel rounded-3xl p-8 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 rounded-xl bg-brand-500 text-white font-mono font-bold flex items-center justify-center text-sm shadow-md">1</div>
+                    <h2 class="text-2xl font-bold text-slate-900">Objective</h2>
+                </div>
+                <p class="text-slate-700 text-base leading-relaxed pl-11 font-medium">
+                    Merancang dan mengkonfigurasi server Linux multi-user dengan hak akses terisolasi, privilese terpusat via sudoers, serta direktori kolaborasi kelompok yang terproteksi.
+                </p>
+            </section>
+
+            <!-- 2. Environment Specifications -->
+            <section id="environment" class="glass-panel rounded-3xl p-8 reveal">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-500 text-white font-mono font-bold flex items-center justify-center text-sm shadow-md">2</div>
+                    <h2 class="text-2xl font-bold text-slate-900">Environment Specifications</h2>
+                </div>
+                <div class="pl-0 sm:pl-11">
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="glass-pill rounded-2xl p-4 shadow-sm">
+                            <span class="block text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-1">OS Platform</span>
+                            <span class="font-bold text-slate-900 text-sm">Ubuntu Server 24.04</span>
+                        </div>
+                        <div class="glass-pill rounded-2xl p-4 shadow-sm">
+                            <span class="block text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-1">Hypervisor</span>
+                            <span class="font-bold text-slate-900 text-sm">VMware</span>
+                        </div>
+                        <div class="glass-pill rounded-2xl p-4 shadow-sm">
+                            <span class="block text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-1">CPU</span>
+                            <span class="font-bold text-slate-900 text-sm">2 CPU</span>
+                        </div>
+                        <div class="glass-pill rounded-2xl p-4 shadow-sm">
+                            <span class="block text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-1">Memory</span>
+                            <span class="font-bold text-slate-900 text-sm">2 GB RAM</span>
+                        </div>
+                        <div class="glass-pill rounded-2xl p-4 shadow-sm">
+                            <span class="block text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-1">Network Mode</span>
+                            <span class="font-bold text-slate-900 text-sm">Bridged</span>
+                        </div>
+                        <div class="glass-pill rounded-2xl p-4 shadow-sm">
+                            <span class="block text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-1">Access Method</span>
+                            <span class="font-bold text-slate-900 text-sm">SSH</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Core Concepts -->
+            <section id="concepts" class="glass-panel rounded-3xl p-8 reveal">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 rounded-xl bg-purple-500 text-white font-mono font-bold flex items-center justify-center text-sm shadow-md">3</div>
+                    <h2 class="text-2xl font-bold text-slate-900">Concepts Covered</h2>
+                </div>
+                <ul class="space-y-3 text-slate-700 text-sm sm:text-base pl-0 sm:pl-11 font-medium">
+                    <li class="flex items-start gap-3">
+                        <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0"></span>
+                        <span>Abstraksi User dan Group pada sistem POSIX.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0"></span>
+                        <span>Prinsip <em class="font-bold text-slate-900 not-italic">Least Privilege</em> dan Kebijakan Sudoers (<code class="glass-pill px-2 py-0.5 rounded text-xs font-mono text-brand-600 font-bold">/etc/sudoers.d/</code>).</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0"></span>
+                        <span>Isolasi Home Directory (<code class="glass-pill px-2 py-0.5 rounded text-xs font-mono text-brand-600 font-bold">chmod 700</code>) dan Restriksi Umask.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0"></span>
+                        <span>Kolaborasi Direktori menggunakan SGID (Setgid Bit) dan Sticky Bit.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 4. Implementation Steps -->
+            <section id="implementation" class="glass-panel rounded-3xl p-8 reveal">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 rounded-xl bg-cyan-500 text-white font-mono font-bold flex items-center justify-center text-sm shadow-md">4</div>
+                    <h2 class="text-2xl font-bold text-slate-900">Implementation Steps</h2>
+                </div>
+                <ol class="space-y-4 text-slate-700 text-sm sm:text-base pl-0 sm:pl-11 font-medium">
+                    <li class="flex items-start gap-4 glass-pill p-4 rounded-2xl">
+                        <span class="font-mono font-bold text-cyan-600 text-sm">01.</span>
+                        <span>Membuat group kerja khusus untuk departemen/proyek (misal: <code class="bg-slate-200/80 px-2 py-0.5 rounded text-xs font-mono font-bold text-slate-900">sysdevs</code>).</span>
+                    </li>
+                    <li class="flex items-start gap-4 glass-pill p-4 rounded-2xl">
+                        <span class="font-mono font-bold text-cyan-600 text-sm">02.</span>
+                        <span>Membuat akun pengguna terpisah tanpa akses root langsung dan mengonfigurasi SSH key authentication.</span>
+                    </li>
+                    <li class="flex items-start gap-4 glass-pill p-4 rounded-2xl">
+                        <span class="font-mono font-bold text-cyan-600 text-sm">03.</span>
+                        <span>Mengkonfigurasi direktori bersama <code class="bg-slate-200/80 px-2 py-0.5 rounded text-xs font-mono font-bold text-slate-900">/var/projects/sysdevs</code> dengan kepemilikan group dan SGID bit.</span>
+                    </li>
+                    <li class="flex items-start gap-4 glass-pill p-4 rounded-2xl">
+                        <span class="font-mono font-bold text-cyan-600 text-sm">04.</span>
+                        <span>Mengatur aturan sudoers kustom untuk mengizinkan perintah tertentu tanpa akses penuh root.</span>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- 5. Commands Reference -->
+            <section id="commands" class="glass-panel rounded-3xl p-8 reveal">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white font-mono font-bold flex items-center justify-center text-sm shadow-md">5</div>
+                        <h2 class="text-2xl font-bold text-slate-900">Commands Reference</h2>
+                    </div>
+                </div>
+                <div class="pl-0 sm:pl-11">
+                    <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-700/50 bg-slate-900 text-slate-100">
+                        <div class="px-4 py-3 bg-slate-800/80 border-b border-slate-700 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <span class="font-mono text-xs text-slate-400">bash - multi-user-setup.sh</span>
+                        </div>
+                        <pre class="p-6 font-mono text-xs sm:text-sm overflow-x-auto text-emerald-400 leading-relaxed"><code><span class="text-slate-500"># 1. Membuat group &amp; user baru</span>
+<span class="text-cyan-400">sudo</span> groupadd sysdevs
+<span class="text-cyan-400">sudo</span> useradd -m -g sysdevs -s /bin/bash engineer1
+
+<span class="text-slate-500"># 2. Mengatur direktori terbagi dengan SGID</span>
+<span class="text-cyan-400">sudo</span> mkdir -p /var/projects/sysdevs
+<span class="text-cyan-400">sudo</span> chown -R root:sysdevs /var/projects/sysdevs
+<span class="text-cyan-400">sudo</span> chmod 2775 /var/projects/sysdevs
+
+<span class="text-slate-500"># 3. Menambahkan aturan sudo terisolasi</span>
+<span class="text-cyan-400">echo</span> <span class="text-amber-300">"engineer1 ALL=(ALL) /usr/bin/systemctl restart nginx"</span> | <span class="text-cyan-400">sudo</span> tee /etc/sudoers.d/engineer1</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Problems Encountered & Solutions -->
+            <section id="problems" class="glass-panel rounded-3xl p-8 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 rounded-xl bg-amber-500 text-white font-mono font-bold flex items-center justify-center text-sm shadow-md">6</div>
+                    <h2 class="text-2xl font-bold text-slate-900">Problems Encountered &amp; Solutions</h2>
+                </div>
+                <p class="text-slate-500 text-sm italic pl-0 sm:pl-11">
+                    [ Kendala dan solusi aktual akan didokumentasikan saat proses pengujian berlangsung ]
+                </p>
+            </section>
+
+            <!-- 7. What I Learned -->
+            <section id="learned" class="glass-panel rounded-3xl p-8 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 rounded-xl bg-blue-500 text-white font-mono font-bold flex items-center justify-center text-sm shadow-md">7</div>
+                    <h2 class="text-2xl font-bold text-slate-900">What I Learned</h2>
+                </div>
+                <p class="text-slate-500 text-sm italic pl-0 sm:pl-11">
+                    [ Poin pembelajaran dan temuan utama akan didokumentasikan setelah eksperimen selesai ]
+                </p>
+            </section>
+
+            <!-- 8. Possible Improvements -->
+            <section id="improvements" class="glass-panel rounded-3xl p-8 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 rounded-xl bg-pink-500 text-white font-mono font-bold flex items-center justify-center text-sm shadow-md">8</div>
+                    <h2 class="text-2xl font-bold text-slate-900">Possible Improvements</h2>
+                </div>
+                <p class="text-slate-500 text-sm italic pl-0 sm:pl-11">
+                    [ Rencana peningkatan dan evaluasi lanjutan akan didokumentasikan setelah lab selesai ]
+                </p>
+            </section>
+
+        </article>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-white/60 bg-white/40 backdrop-blur-xl relative z-10">
+        <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-1">Infra Learning Lab</h2>
+                <p class="text-slate-600 font-medium text-sm">Reza Hakim Arafah</p>
+            </div>
+            
+            <div class="flex flex-wrap gap-3 text-xs font-mono font-semibold text-slate-700">
+                <span class="glass-pill px-4 py-2 rounded-xl">Informatics Student</span>
+                <span class="glass-pill px-4 py-2 rounded-xl">Network Engineer</span>
+                <span class="glass-pill px-4 py-2 rounded-xl">DevOps Engineer</span>
+            </div>
+        </div>
+        <div class="border-t border-slate-200/60 py-6">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>© 2026 Infra Learning Lab. Designed with Authentic Glassmorphism.</p>
+                <div class="flex gap-6 font-medium">
+                    <a href="https://github.com/reezakim" target="_blank" rel="noopener" class="hover:text-slate-900 transition-colors">GitHub</a>
+                    <a href="https://instagram.com/reezakim" target="_blank" rel="noopener" class="hover:text-slate-900 transition-colors">Instagram</a>
+                    <a href="https://linkedin.com/in/rezahakim" target="_blank" rel="noopener" class="hover:text-slate-900 transition-colors">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script src="../../../js/main.js" defer></script>
+</body>
+</html>

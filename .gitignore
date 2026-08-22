@@ -5,4 +5,12 @@ data/content.json
 image-copy.png
 image.png
 reza-infra-learning.zip
-.gitignore.swp
+*.swp
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+*.log

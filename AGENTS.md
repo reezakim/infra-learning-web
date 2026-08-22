@@ -13,7 +13,7 @@ bertema glassmorphism, isi: Hero, About, Learning Lab, Projects, Contact.
   file di luar folder ini sama sekali.
 
 ## Permission Model
-- Read/write/execute HANYA pada file yang eksplisit gue sebutkan di task.
+- Read/write/execute HANYA pada file yang eksplisit user sebutkan di task.
 - Kalau ada file yang menurutmu perlu diubah tapi belum disebutkan di task, 
   STOP dan tanya dulu — jangan asumsi dan langsung edit.
 
@@ -21,6 +21,6 @@ bertema glassmorphism, isi: Hero, About, Learning Lab, Projects, Contact.
 1. Baca task yang diberikan.
 2. Buat PLAN dulu: file apa yang bakal disentuh, perubahan apa, alasannya.
    Jangan langsung nulis/edit kode di tahap ini.
-3. Tunggu approval eksplisit dari gue.
+3. Tunggu approval eksplisit dari User.
 4. Setelah approved, baru implementasi sesuai plan yang udah disetujui — 
    jangan menyimpang dari plan tanpa konfirmasi ulang.

@@ -1,0 +1,76 @@
+<!-- Mobile & Tablet Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 lg:hidden pointer-events-none" id="mobile-nav">
+      <div class="flex flex-col items-center pt-3 px-3">
+        <nav class="glass-nav-mobile rounded-full pl-4 pr-1.5 py-1.5 flex items-center gap-6" id="mobile-nav-bar" aria-label="Mobile navigation">
+          <a href="#home" class="flex items-center gap-2 shrink-0">
+            <div
+              class="logo-chip"
+            >
+              RHA
+            </div>
+            <span class="font-semibold text-[#1d1d1f] tracking-tight text-[15px]"
+              >InfraLab.</span
+            >
+          </a>
+          <button
+            id="menu-btn"
+            type="button"
+            aria-label="Buka menu navigasi"
+            aria-controls="mobile-menu-wrap"
+            aria-expanded="false"
+            class="relative w-9 h-9 flex items-center justify-center rounded-full glass-pill text-slate-800"
+          >
+            <svg class="menu-icon-open absolute w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+            <svg class="menu-icon-close absolute w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+        </nav>
+        <div id="mobile-menu-wrap">
+          <div
+            class="glass-nav-mobile mt-2 rounded-2xl px-5 py-3 w-72 flex flex-col gap-1 text-[15px]"
+          >
+            <a href="#home" class="mac-nav-link" data-nav="home">Home</a>
+            <a href="#about" class="mac-nav-link" data-nav="about">About</a>
+            <a href="coming-soon.html?from=learning-lab" class="mac-nav-link"
+              >Learning Lab</a
+            >
+            <a href="coming-soon.html?from=projects" class="mac-nav-link"
+              >Projects</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+        <!-- Desktop top navigation -->
+    <header class="mac-nav-wrapper hidden lg:block" id="mac-nav-wrapper">
+      <nav class="mac-nav" id="mac-nav" aria-label="Main navigation">
+        <a href="#home" class="flex items-center gap-2.5 group shrink-0">
+            <div
+              class="logo-chip"
+            >
+              RHA
+            </div>
+            <span
+              class="font-semibold text-[#1d1d1f] tracking-tight text-[15px] group-hover:text-brand-600 transition-colors"
+              >InfraLab.</span
+            >
+        </a>
+        <div class="flex items-center gap-0.5 text-[13px]">
+          <a href="#home" class="mac-nav-link" data-nav="home">Home</a>
+          <a href="#about" class="mac-nav-link" data-nav="about">About</a>
+          <a href="coming-soon.html?from=learning-lab" class="mac-nav-link"
+            >Learning Lab</a
+          >
+          <a href="coming-soon.html?from=projects" class="mac-nav-link"
+            >Projects</a
+          >
+        </div>
+      </nav>
+    </header>

@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Reza Hakim Arafah | Infrastructure Engineer',
+  description = 'Personal portfolio and infrastructure learning lab of Reza Hakim Arafah, exploring Linux, networking, automation, Docker, and infrastructure engineering.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://reezakim.my.id/" />
+    <meta property="og:url" content="https://reezakim.my.id/" />
+    <meta
+      property="og:image"
+      content="https://reezakim.my.id/images/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta
+      name="twitter:image"
+      content="https://reezakim.my.id/images/og-image.png"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Reza Hakim Arafah",
+        "jobTitle": "Infrastructure Engineer",
+        "url": "https://reezakim.my.id/",
+        "image": "https://reezakim.my.id/images/hero-image1.jpg",
+        "sameAs": [
+          "https://github.com/reezakim",
+          "https://instagram.com/reezakim",
+          "https://linkedin.com/in/rezahakim"
+        ],
+        "knowsAbout": [
+          "Linux Administration",
+          "Networking",
+          "Automation & Scripting",
+          "Docker",
+          "Infrastructure Engineering"
+        ]
+      }
+    </script>
+  </head>
+  <body
+    class="antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white"
+  >
+    <Navbar />
+    <slot />
+    <Footer />
+    <script is:inline src="/js/main.js"></script>
+  </body>
+</html>

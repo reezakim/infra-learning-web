@@ -7,10 +7,10 @@ import heroImage2 from '../assets/hero-image2.jpg';
 
 <BaseLayout>
     <!-- Hero Section -->
-    <main class="relative max-w-7xl mx-auto px-6 pt-32 lg:pt-36 pb-20">
-      <div class="editorial-asymmetric-grid items-start scroll-mt-24 lg:scroll-mt-28" id="home">
+    <main class="relative max-w-7xl mx-auto px-6 pt-32 lg:pt-24 pb-16 lg:pb-8 lg:min-h-screen lg:flex lg:flex-col lg:justify-center">
+      <div class="editorial-asymmetric-grid items-center scroll-mt-24 lg:scroll-mt-28" id="home">
         <!-- Main editorial spread -->
-        <div class="grid gap-8 lg:grid-cols-[minmax(12rem,0.7fr)_minmax(18rem,1.3fr)] items-start animate-fade-in-up">
+        <div class="grid gap-8 lg:grid-cols-[minmax(12rem,0.7fr)_minmax(18rem,1.3fr)] items-center animate-fade-in-up">
           <div class="flex flex-col items-start">
             <span class="editorial-tag editorial-tag--accent mb-6">
               Infrastructure / DevOps · Portfolio issue 01 / 2026
@@ -22,23 +22,11 @@ import heroImage2 from '../assets/hero-image2.jpg';
               Personal portfolio &amp; infrastructure learning lab untuk Linux,
               networking, otomasi, Docker, dan arsitektur sistem.
             </p>
-            <div class="flex flex-wrap gap-2 mb-6">
+            <div class="flex flex-wrap gap-2">
               <span class="editorial-tag">Linux</span>
               <span class="editorial-tag">Docker</span>
               <span class="editorial-tag">Python</span>
             </div>
-            <figure class="w-full max-w-[11rem] overflow-hidden rounded-2xl border border-slate-900/15">
-              <Image
-                src={heroImage2}
-                alt="Reza Hakim Arafah"
-                widths={[184, 296, 444]}
-                sizes="(min-width: 1024px) 176px, 50vw"
-                loading="eager"
-                decoding="async"
-                fetchpriority="low"
-                class="block aspect-[4/5] w-full object-cover"
-              />
-            </figure>
           </div>
 
           <div class="mac-window w-full" id="hero-terminal">
@@ -151,7 +139,18 @@ import heroImage2 from '../assets/hero-image2.jpg';
               >.
             </p>
           </div>
-          <div class="flex flex-wrap md:flex-col gap-2.5 flex-shrink-0">
+          <div class="flex flex-wrap md:flex-col items-start gap-2.5 flex-shrink-0">
+            <figure class="w-full max-w-[10rem] overflow-hidden rounded-2xl border border-slate-900/15">
+              <Image
+                src={heroImage2}
+                alt="Reza Hakim Arafah"
+                widths={[160, 320]}
+                sizes="(min-width: 768px) 160px, 40vw"
+                loading="lazy"
+                decoding="async"
+                class="block aspect-[4/5] w-full object-cover"
+              />
+            </figure>
             <span
               class="glass-pill px-4 py-2 rounded-xl text-xs font-mono font-bold text-slate-800 flex items-center gap-2"
             >

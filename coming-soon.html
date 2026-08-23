@@ -35,111 +35,130 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 
+    <!-- Fonts (async loading) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap"
-      rel="stylesheet"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap"
+      />
+    </noscript>
 
     <!-- Tailwind CSS (compiled static) -->
     <link rel="stylesheet" href="css/tailwind.css" />
 
+    <!-- macOS-inspired UI Styles -->
+    <link rel="stylesheet" href="css/style.css" />
+
     <style>
-      .glass-panel {
-        background: rgba(255, 255, 255, 0.42);
-        backdrop-filter: blur(24px) saturate(180%);
-        -webkit-backdrop-filter: blur(24px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.75);
-        box-shadow:
-          inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
-          0 20px 40px -15px rgba(12, 74, 110, 0.07);
+      .coming-soon-panel {
+        background: var(--paper);
+        border: 1px solid var(--hairline);
+        border-radius: 0;
       }
 
-      .glass-nav {
-        background: rgba(255, 255, 255, 0.45);
-        backdrop-filter: blur(24px) saturate(180%);
-        -webkit-backdrop-filter: blur(24px) saturate(180%);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      .coming-soon-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.96);
+        border-bottom: 1px solid var(--hairline);
       }
 
-      .glass-pill {
-        background: rgba(255, 255, 255, 0.55);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.8);
+      .coming-soon-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        border: 1px solid var(--hairline);
+        border-radius: 0;
       }
 
-      .text-gradient {
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(135deg, #0c4a6e 0%, #0284c7 50%, #4f46e5 100%);
+      .coming-soon-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 600;
+        color: #64748b;
+        border: 1px solid var(--hairline);
+        border-radius: 0;
       }
-
-      .animation-delay-2000 { animation-delay: 2.5s; }
-      .animation-delay-4000 { animation-delay: 5s; }
     </style>
 </head>
-<body class="bg-[#f1f5f9] text-slate-800 antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
+<body class="text-[#1d1d1f] antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
 
-    <div class="fixed inset-0 z-[-1] w-full h-full overflow-hidden pointer-events-none" aria-hidden="true">
-        <div class="absolute top-[-5%] left-[-5%] w-[600px] h-[600px] bg-sky-400/50 rounded-full mix-blend-multiply filter blur-[56px] animate-blob"></div>
-        <div class="absolute top-[18%] right-[-5%] w-[550px] h-[550px] bg-indigo-400/50 rounded-full mix-blend-multiply filter blur-[56px] animate-blob animation-delay-2000"></div>
-        <div class="absolute top-[45%] left-[10%] w-[650px] h-[650px] bg-purple-400/45 rounded-full mix-blend-multiply filter blur-[64px] animate-blob animation-delay-4000"></div>
-        <div class="absolute bottom-[-10%] left-[25%] w-[700px] h-[700px] bg-emerald-300/45 rounded-full mix-blend-multiply filter blur-[64px] animate-blob animation-delay-2000"></div>
-    </div>
-
-    <nav class="fixed top-0 w-full z-50 glass-nav">
+    <!-- Navigation -->
+    <nav class="coming-soon-nav">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 text-white font-bold font-mono text-lg group-hover:scale-105 transition-transform">
-                    RHA
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-brand-600 transition-colors leading-none">InfraLab.</span>
-                    <span class="text-[10px] font-mono text-slate-600 font-medium mt-0.5">Reza Hakim Arafah</span>
-                </div>
+            <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
+                <div class="logo-chip">RHA</div>
+                <span class="font-semibold text-[#1d1d1f] tracking-tight text-[15px] group-hover:text-brand-600 transition-colors">InfraLab.</span>
             </a>
-            <a href="index.html" class="glass-pill px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-900 hover:bg-white hover:shadow-lg transition-all">
+            <a href="index.html" class="mac-btn text-sm">
                 Back to Home
             </a>
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main class="relative max-w-3xl mx-auto px-6 pt-32 pb-20 min-h-screen flex flex-col justify-center">
-        <nav aria-label="Breadcrumb" class="mb-8 animate-fade-in-up" id="breadcrumb">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="mb-8" id="breadcrumb">
             <ol class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-600"></ol>
         </nav>
 
-        <div class="glass-panel rounded-3xl p-8 lg:p-12 text-center animate-fade-in-up">
-            <div class="inline-flex items-center gap-2 rounded-full glass-pill px-4 py-1.5 font-mono text-xs font-bold text-brand-600 shadow-sm mb-6" id="page-badge">
-                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse-soft"></span>
+        <!-- Coming Soon Card -->
+        <div class="coming-soon-panel p-8 lg:p-12 text-center">
+            <!-- Badge -->
+            <div class="coming-soon-badge mb-6" id="page-badge">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
                 COMING SOON
             </div>
 
-            <div class="w-16 h-16 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg" id="page-icon"></div>
+            <!-- Icon -->
+            <div class="w-16 h-16 rounded-2xl mx-auto mb-6 flex items-center justify-center bg-slate-900" id="page-icon"></div>
 
+            <!-- Title -->
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3" id="page-title">
                 Sedang Dikembangkan
             </h1>
 
+            <!-- Description -->
             <p class="text-slate-600 text-base leading-relaxed max-w-lg mx-auto mb-8 font-medium" id="page-description">
                 Konten ini masih dalam tahap pengembangan dan akan segera tersedia.
             </p>
 
-            <div class="glass-pill inline-flex items-center gap-2 px-5 py-3 rounded-2xl font-mono text-xs font-semibold text-slate-700 mb-10" id="status-panel">
+            <!-- Status -->
+            <div class="coming-soon-status mb-10" id="status-panel">
                 <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
                 <span id="status-text">Status: In development</span>
             </div>
 
+            <!-- Actions -->
             <div class="flex flex-wrap items-center justify-center gap-4">
-                <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-md group">
-                    <svg class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                <a href="index.html" class="mac-btn mac-btn-primary inline-flex items-center gap-2 text-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     Kembali ke Home
                 </a>
-                <a href="index.html#contact" class="glass-pill inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-slate-800 hover:bg-white/80 transition-all shadow-sm">
+                <a href="index.html#contact" class="mac-btn inline-flex items-center gap-2 text-sm">
                     Hubungi Saya
                 </a>
             </div>

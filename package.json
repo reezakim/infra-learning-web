@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "tailwind:build": "npx tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --minify"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^5.1.1"
   },
   "devDependencies": {

@@ -41,115 +41,104 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png" />
 
-    <!-- Fonts -->
+    <!-- Fonts (async loading) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap"
-      rel="stylesheet"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap"
+      />
+    </noscript>
 
-    <!-- Tailwind CSS CDN -->
     <!-- Tailwind CSS (compiled static) -->
     <link rel="stylesheet" href="../../css/tailwind.css" />
 
-    <!-- Authentic Glassmorphism CSS Styles -->
+    <!-- macOS-inspired UI Styles -->
+    <link rel="stylesheet" href="../../css/style.css" />
+
     <style>
-      .glass-panel {
-        background: rgba(255, 255, 255, 0.42);
-        backdrop-filter: blur(24px) saturate(180%);
-        -webkit-backdrop-filter: blur(24px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.75);
-        box-shadow: 
-          inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
-          0 20px 40px -15px rgba(12, 74, 110, 0.07);
-      }
-      
-      .glass-nav {
-        background: rgba(255, 255, 255, 0.45);
-        backdrop-filter: blur(24px) saturate(180%);
-        -webkit-backdrop-filter: blur(24px) saturate(180%);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      .learning-panel {
+        background: var(--paper);
+        border: 1px solid var(--hairline);
+        border-radius: 0;
       }
 
-      .glass-card {
-        background: rgba(255, 255, 255, 0.42);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.7);
-        box-shadow: 
-          inset 0 1px 1px 0 rgba(255, 255, 255, 0.85),
-          0 10px 30px -10px rgba(0, 0, 0, 0.05);
-        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      
-      .glass-card:hover {
-        background: rgba(255, 255, 255, 0.68);
-        transform: translateY(-6px) scale(1.015);
-        border-color: rgba(255, 255, 255, 1);
-        box-shadow: 
-          inset 0 1px 1px 0 rgba(255, 255, 255, 1),
-          0 25px 45px -12px rgba(14, 165, 233, 0.18);
+      .learning-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.96);
+        border-bottom: 1px solid var(--hairline);
       }
 
-      .glass-pill {
-        background: rgba(255, 255, 255, 0.55);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.8);
+      .learning-card {
+        background: var(--paper);
+        border: 1px solid var(--hairline);
+        border-radius: 0;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
 
-      .text-gradient {
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(135deg, #0c4a6e 0%, #0284c7 50%, #4f46e5 100%);
+      .learning-card:hover {
+        box-shadow: inset 0 3px 0 var(--accent);
       }
-      
-      .animation-delay-2000 { animation-delay: 2.5s; }
-      .animation-delay-4000 { animation-delay: 5s; }
-      
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+      .learning-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        border: 1px solid var(--hairline);
+        border-radius: 0;
       }
-      .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
+
+      .learning-pill {
+        padding: 6px 14px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: #64748b;
+        border: 1px solid var(--hairline);
+        border-radius: 0;
+      }
+
+      .learning-footer {
+        border-top: 1px solid var(--hairline);
+        background: #111111;
+        color: #cbd5e1;
       }
     </style>
 </head>
-<body class="bg-[#f1f5f9] text-slate-800 antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
-
-    <!-- High-Contrast Vibrant Animated Glass Mesh Background -->
-    <div class="fixed inset-0 z-[-1] w-full h-full overflow-hidden pointer-events-none" aria-hidden="true">
-        <div class="absolute top-[-5%] left-[-5%] w-[600px] h-[600px] bg-sky-400/50 rounded-full mix-blend-multiply filter blur-[56px] animate-blob"></div>
-        <div class="absolute top-[20%] right-[-5%] w-[550px] h-[550px] bg-indigo-400/50 rounded-full mix-blend-multiply filter blur-[56px] animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-[-10%] left-[20%] w-[650px] h-[650px] bg-pink-400/45 rounded-full mix-blend-multiply filter blur-[64px] animate-blob animation-delay-4000"></div>
-    </div>
+<body class="text-[#1d1d1f] antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-nav">
+    <nav class="learning-nav">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../../index.html" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 text-white font-bold font-mono text-lg group-hover:scale-105 transition-transform">
-                    RHA
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-brand-600 transition-colors leading-none">InfraLab.</span>
-                    <span class="text-[10px] font-mono text-slate-600 font-medium mt-0.5">Reza Hakim Arafah</span>
-                </div>
+            <a href="../../index.html" class="flex items-center gap-2.5 group shrink-0">
+                <div class="logo-chip">RHA</div>
+                <span class="font-semibold text-[#1d1d1f] tracking-tight text-[15px] group-hover:text-brand-600 transition-colors">InfraLab.</span>
             </a>
-            <div class="hidden md:flex gap-8 items-center font-semibold text-sm text-slate-600">
-                <a href="../../index.html" class="hover:text-brand-600 transition-colors">Home</a>
-                <a href="../../index.html#about" class="hover:text-brand-600 transition-colors">About</a>
-                <a href="../../index.html#learning-lab" class="hover:text-brand-600 transition-colors">Learning Lab</a>
-                <a href="../../index.html#projects" class="hover:text-brand-600 transition-colors">Projects</a>
-                <a href="#contact" class="hover:text-brand-600 transition-colors">Contact</a>
+            <div class="hidden md:flex items-center gap-0.5 text-[13px]">
+                <a href="../../index.html" class="mac-nav-link" data-nav="home">Home</a>
+                <a href="../../index.html#about" class="mac-nav-link">About</a>
+                <a href="../../index.html#learning-lab" class="mac-nav-link">Learning Lab</a>
+                <a href="../../index.html#projects" class="mac-nav-link">Projects</a>
             </div>
-            <a href="../../index.html#contact" class="glass-pill px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-900 hover:bg-white transition-all">
+            <a href="../../index.html#contact" class="mac-btn text-sm">
                 Contact Me
             </a>
         </div>
@@ -159,24 +148,24 @@
     <main class="relative max-w-7xl mx-auto px-6 pt-32 pb-20 min-h-screen">
         
         <!-- Breadcrumbs -->
-        <nav aria-label="Breadcrumb" class="mb-8 animate-fade-in-up">
+        <nav aria-label="Breadcrumb" class="mb-8">
             <ol class="flex items-center gap-2 font-mono text-xs text-slate-600">
-                <li><a href="../../index.html" class="glass-pill px-3.5 py-1.5 rounded-xl hover:bg-white transition-colors">Home</a></li>
+                <li><a href="../../index.html" class="learning-pill hover:bg-slate-100 transition-colors">Home</a></li>
                 <li class="text-slate-400">/</li>
-                <li><a href="../../index.html#learning-lab" class="glass-pill px-3.5 py-1.5 rounded-xl hover:bg-white transition-colors">Learning Lab</a></li>
+                <li><a href="../../index.html#learning-lab" class="learning-pill hover:bg-slate-100 transition-colors">Learning Lab</a></li>
                 <li class="text-slate-400">/</li>
-                <li aria-current="page" class="glass-pill px-3.5 py-1.5 rounded-xl text-brand-600 font-bold border-brand-200">Linux</li>
+                <li aria-current="page" class="learning-pill text-brand-600 font-bold">Linux</li>
             </ol>
         </nav>
 
         <!-- Lab Hero -->
-        <section id="linux-hero" class="mb-16 animate-fade-in-up">
-            <div class="glass-panel rounded-3xl p-8 lg:p-12 relative overflow-hidden">
-                <div class="inline-flex items-center gap-2 rounded-full glass-pill px-4 py-1.5 font-mono text-xs font-bold text-brand-600 shadow-sm mb-4">
+        <section id="linux-hero" class="mb-16">
+            <div class="learning-panel p-8 lg:p-12 relative overflow-hidden">
+                <div class="learning-badge mb-4">
                     LAB MODULE
                 </div>
                 <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
-                    Linux <span class="text-gradient">Learning Lab</span>
+                    Linux <span class="marker">Learning Lab</span>
                 </h1>
                 <p class="text-slate-700 text-lg leading-relaxed max-w-2xl font-medium">
                     Praktik langsung administrasi Linux, manajemen server, hardening, dan troubleshooting sistem secara bertahap.
@@ -186,7 +175,7 @@
 
         <!-- Learning Domains Section -->
         <section id="topics" class="relative z-10">
-            <div class="mb-10 reveal">
+            <div class="mb-10">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-brand-600 text-xs font-mono font-bold tracking-wider mb-3">
                     <span class="w-2 h-2 rounded-full bg-brand-500"></span>
                     TOPICS
@@ -200,9 +189,9 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
                 <!-- Domain 1: Linux Foundation -->
-                <div class="glass-card rounded-3xl p-7 reveal flex flex-col justify-between">
+                <div class="learning-card p-7 flex flex-col justify-between">
                     <div>
-                        <span class="glass-pill px-3 py-1 rounded-lg text-blue-800 font-mono text-xs font-bold mb-4 inline-block">Foundation</span>
+                        <span class="learning-pill mb-4 inline-block">Foundation</span>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">Linux Foundation</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">
                             Konsep dasar OS, CLI, hierarki direktori Linux, dan manajemen proses.
@@ -217,9 +206,9 @@
                 </div>
 
                 <!-- Domain 2: Basic Networking -->
-                <div class="glass-card rounded-3xl p-7 reveal flex flex-col justify-between" style="transition-delay: 50ms;">
+                <div class="learning-card p-7 flex flex-col justify-between">
                     <div>
-                        <span class="glass-pill px-3 py-1 rounded-lg text-emerald-800 font-mono text-xs font-bold mb-4 inline-block">Networking</span>
+                        <span class="learning-pill mb-4 inline-block">Networking</span>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">Basic Networking</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">
                             Konfigurasi interface, IP addressing, routing, DNS inspection, dan net-tools.
@@ -234,9 +223,9 @@
                 </div>
 
                 <!-- Domain 3: SSH & Remote Access -->
-                <div class="glass-card rounded-3xl p-7 reveal flex flex-col justify-between" style="transition-delay: 100ms;">
+                <div class="learning-card p-7 flex flex-col justify-between">
                     <div>
-                        <span class="glass-pill px-3 py-1 rounded-lg text-purple-800 font-mono text-xs font-bold mb-4 inline-block">Access</span>
+                        <span class="learning-pill mb-4 inline-block">Access</span>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">SSH &amp; Remote Access</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">
                             Key-based authentication, SSH config, port forwarding, dan secure shell management.
@@ -251,9 +240,9 @@
                 </div>
 
                 <!-- Domain 4: File Permissions -->
-                <div class="glass-card rounded-3xl p-7 reveal flex flex-col justify-between" style="transition-delay: 150ms;">
+                <div class="learning-card p-7 flex flex-col justify-between">
                     <div>
-                        <span class="glass-pill px-3 py-1 rounded-lg text-amber-800 font-mono text-xs font-bold mb-4 inline-block">Permissions</span>
+                        <span class="learning-pill mb-4 inline-block">Permissions</span>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">File Permissions</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">
                             Hak akses rwx, ownership (chown/chmod), umask, SUID/SGID, dan Access Control Lists (ACL).
@@ -268,16 +257,16 @@
                 </div>
 
                 <!-- Domain 5: Multi-User Server (ACTIVE) -->
-                <div class="glass-card rounded-3xl p-7 reveal flex flex-col justify-between border-brand-500/40" style="transition-delay: 200ms;">
+                <div class="learning-card p-7 flex flex-col justify-between border-l-4 border-l-brand-500">
                     <div>
-                        <span class="glass-pill px-3 py-1 rounded-lg text-pink-800 font-mono text-xs font-bold mb-4 inline-block">Lab module</span>
+                        <span class="learning-pill mb-4 inline-block">Lab module</span>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">Multi-User Server</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">
                             Manajemen user, usergroup, sudoers policy, environment isolation, dan quota.
                         </p>
                     </div>
                     <div>
-                        <a href="multi-user-server/index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-md group">
+                        <a href="multi-user-server/index.html" class="mac-btn mac-btn-primary inline-flex items-center gap-2 text-sm">
                             Open Lab
                             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                         </a>
@@ -285,9 +274,9 @@
                 </div>
 
                 <!-- Domain 6: Web Server -->
-                <div class="glass-card rounded-3xl p-7 reveal flex flex-col justify-between" style="transition-delay: 250ms;">
+                <div class="learning-card p-7 flex flex-col justify-between">
                     <div>
-                        <span class="glass-pill px-3 py-1 rounded-lg text-cyan-800 font-mono text-xs font-bold mb-4 inline-block">Web server</span>
+                        <span class="learning-pill mb-4 inline-block">Web server</span>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">Web Server</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">
                             Installasi &amp; konfigurasi Nginx/Apache, virtual hosts, SSL, dan reverse proxy.
@@ -302,9 +291,9 @@
                 </div>
 
                 <!-- Domain 7: Server Hardening -->
-                <div class="glass-card rounded-3xl p-7 reveal flex flex-col justify-between" style="transition-delay: 300ms;">
+                <div class="learning-card p-7 flex flex-col justify-between">
                     <div>
-                        <span class="glass-pill px-3 py-1 rounded-lg text-emerald-800 font-mono text-xs font-bold mb-4 inline-block">Hardening</span>
+                        <span class="learning-pill mb-4 inline-block">Hardening</span>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">Server Hardening</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">
                             UFW firewall setup, Fail2ban, disabling root SSH login, dan system auditing.
@@ -324,9 +313,13 @@
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="border-t border-white/60 bg-white/40 backdrop-blur-xl relative z-10">
+    <footer id="contact" class="learning-footer relative z-10">
         <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
             <div>
+                <span class="rack-led">
+                    <span class="rack-led-dot"></span>
+                    ALL SYSTEMS ONLINE
+                </span>
                 <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-1">Infra Learning Lab</h2>
                 <p class="text-slate-600 font-medium text-sm">Reza Hakim Arafah</p>
             </div>
@@ -339,7 +332,7 @@
         </div>
         <div class="border-t border-slate-200/60 py-6">
             <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-                <p>© 2026 Infra Learning Lab. Designed with Authentic Glassmorphism.</p>
+                <p>© 2026 Infra Learning Lab. Designed with macOS-inspired UI.</p>
                 <div class="flex gap-6 font-medium">
                     <a href="https://github.com/reezakim" target="_blank" rel="noopener" class="hover:text-slate-900 transition-colors">GitHub</a>
                     <a href="https://instagram.com/reezakim" target="_blank" rel="noopener" class="hover:text-slate-900 transition-colors">Instagram</a>

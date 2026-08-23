@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('learning')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const TOPIC_LABEL = {
+  linux: 'LINUX',
+  network: 'NETWORK',
+  automation: 'AUTOMATION',
+  containerization: 'CONTAINERIZATION',
+};
+---
+
+<BaseLayout
+  title="Learning Lab | InfraLab"
+  description="Dokumentasi lab belajar infrastruktur: Linux, networking, automation, dan containerization."
+>
+  <main class="max-w-7xl mx-auto px-6 pt-28 pb-20 min-h-screen">
+    <div class="mb-12">
+      <span class="sec-no">02</span>
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-brand-600 text-xs font-mono font-bold tracking-wider mb-3">
+        <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+        LEARNING LAB
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+        Learning Lab
+      </h2>
+      <p class="text-slate-600 max-w-2xl text-base font-medium">
+        Dokumentasi praktis administrasi server, jaringan, otomatisasi, dan containerization.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {entries.map((entry) => (
+        <a href={`/learning/${entry.id}/`} class="glass-card rounded-none p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-4 font-mono text-[11px] tracking-widest">
+              <span class="text-slate-500">{TOPIC_LABEL[entry.data.topic]}</span>
+              <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+              <span class:list={[entry.data.status === 'done' ? 'text-emerald-600' : 'text-amber-600']}>
+                {entry.data.status.toUpperCase()}
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">{entry.data.title}</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">{entry.data.description}</p>
+          </div>
+          <div class="mt-6 flex items-center justify-between font-mono text-xs">
+            <span class="text-slate-500">{entry.data.date.toISOString().slice(0, 10)}</span>
+            <span class="text-[#ff3e00] font-semibold">BACA →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

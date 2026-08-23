@@ -6,12 +6,16 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  showNavbar?: boolean;
 }
 
 const {
   title = 'Reza Hakim Arafah | Infrastructure Engineer',
   description = 'Personal portfolio and infrastructure learning lab of Reza Hakim Arafah, exploring Linux, networking, automation, Docker, and infrastructure engineering.',
+  showNavbar = true,
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -24,8 +28,8 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <link rel="canonical" href="https://reezakim.my.id/" />
-    <meta property="og:url" content="https://reezakim.my.id/" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:url" content={canonicalURL} />
     <meta
       property="og:image"
       content="https://reezakim.my.id/images/og-image.png"
@@ -79,7 +83,7 @@ const {
   <body
     class="antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white"
   >
-    <Navbar />
+    {showNavbar && <Navbar />}
     <slot />
     <Footer />
     <script is:inline src="/js/main.js"></script>

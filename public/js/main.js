@@ -125,14 +125,23 @@
       })
       .filter(Boolean);
 
+    let sectionTops = [];
+
+    function measureSections() {
+      sectionTops = sections.map((section) => ({
+        link: section.link,
+        top: section.el.offsetTop,
+      }));
+    }
+
     function onScroll() {
       wrapper.classList.toggle("is-scrolled", window.scrollY > 24);
 
       const scrollPos = window.scrollY + window.innerHeight * 0.35;
-      let current = sections[0];
+      let current = sectionTops[0];
 
-      sections.forEach((section) => {
-        if (section.el.offsetTop <= scrollPos) current = section;
+      sectionTops.forEach((section) => {
+        if (section.top <= scrollPos) current = section;
       });
 
       navLinks.forEach((link) => {
@@ -140,6 +149,8 @@
       });
     }
 
+    measureSections();
+    window.addEventListener("resize", measureSections, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
@@ -153,15 +164,27 @@
     const cards = document.querySelectorAll(".tilt-card");
 
     cards.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
+      let frame = null;
 
-        card.style.transform = `perspective(900px) rotateX(${y * -6}deg) rotateY(${x * 6}deg) translateY(-4px)`;
+      card.addEventListener("mousemove", (e) => {
+        if (frame) return;
+        const { clientX, clientY } = e;
+
+        frame = requestAnimationFrame(() => {
+          frame = null;
+          const rect = card.getBoundingClientRect();
+          const x = (clientX - rect.left) / rect.width - 0.5;
+          const y = (clientY - rect.top) / rect.height - 0.5;
+
+          card.style.transform = `perspective(900px) rotateX(${y * -6}deg) rotateY(${x * 6}deg) translateY(-4px)`;
+        });
       });
 
       card.addEventListener("mouseleave", () => {
+        if (frame) {
+          cancelAnimationFrame(frame);
+          frame = null;
+        }
         card.style.transform = "";
       });
     });
@@ -179,21 +202,33 @@
 
     if (!visual || !terminal) return;
 
+    let frame = null;
+
     visual.addEventListener("mousemove", (e) => {
-      const rect = visual.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      if (frame) return;
+      const { clientX, clientY } = e;
 
-      terminal.style.transform = `translate(${x * 10}px, ${y * 8}px)`;
+      frame = requestAnimationFrame(() => {
+        frame = null;
+        const rect = visual.getBoundingClientRect();
+        const x = (clientX - rect.left) / rect.width - 0.5;
+        const y = (clientY - rect.top) / rect.height - 0.5;
 
-      photos.forEach((photo, i) => {
-        const factor = i === 0 ? 18 : 14;
-        const dir = i === 0 ? 1 : -1;
-        photo.style.translate = `${x * factor * dir}px ${y * factor}px`;
+        terminal.style.transform = `translate(${x * 10}px, ${y * 8}px)`;
+
+        photos.forEach((photo, i) => {
+          const factor = i === 0 ? 18 : 14;
+          const dir = i === 0 ? 1 : -1;
+          photo.style.translate = `${x * factor * dir}px ${y * factor}px`;
+        });
       });
     });
 
     visual.addEventListener("mouseleave", () => {
+      if (frame) {
+        cancelAnimationFrame(frame);
+        frame = null;
+      }
       terminal.style.transform = "";
       photos.forEach((photo) => {
         photo.style.translate = "";
@@ -208,14 +243,26 @@
     if (prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
 
     document.querySelectorAll("[data-magnetic]").forEach((wrap) => {
+      let frame = null;
+
       wrap.addEventListener("mousemove", (e) => {
-        const rect = wrap.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        wrap.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+        if (frame) return;
+        const { clientX, clientY } = e;
+
+        frame = requestAnimationFrame(() => {
+          frame = null;
+          const rect = wrap.getBoundingClientRect();
+          const x = clientX - rect.left - rect.width / 2;
+          const y = clientY - rect.top - rect.height / 2;
+          wrap.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+        });
       });
 
       wrap.addEventListener("mouseleave", () => {
+        if (frame) {
+          cancelAnimationFrame(frame);
+          frame = null;
+        }
         wrap.style.transform = "";
       });
     });

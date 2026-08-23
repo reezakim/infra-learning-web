@@ -5,6 +5,7 @@ module.exports = {
     "./public/**/*.html",
     "./legacy/**/*.html",
   ],
+  plugins: [require("@tailwindcss/typography")],
   theme: {
     extend: {
       fontFamily: {

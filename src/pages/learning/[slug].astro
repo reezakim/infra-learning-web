@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('learning');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const TOPIC_LABEL = {
+  linux: 'LINUX',
+  network: 'NETWORK',
+  automation: 'AUTOMATION',
+  containerization: 'CONTAINERIZATION',
+};
+
+const STATUS_LABEL = {
+  done: 'DONE',
+  ongoing: 'ONGOING',
+};
+---
+
+<BaseLayout
+  title={`${entry.data.title} | Learning Lab — InfraLab`}
+  description={entry.data.description}
+>
+  <main class="max-w-3xl mx-auto px-6 pt-28 pb-20 min-h-screen">
+    <nav aria-label="Breadcrumb" class="mb-10 animate-fade-in-up">
+      <ol class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-600">
+        <li><a href="/" class="hover:text-slate-900 transition-colors">Home</a></li>
+        <li class="text-slate-400" aria-hidden="true">/</li>
+        <li><a href="/learning/" class="hover:text-slate-900 transition-colors">Learning Lab</a></li>
+        <li class="text-slate-400" aria-hidden="true">/</li>
+        <li aria-current="page" class="text-brand-600 font-bold">{entry.data.title}</li>
+      </ol>
+    </nav>
+
+    <header class="mb-10 animate-fade-in-up">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-brand-600 text-xs font-mono font-bold tracking-wider mb-4">
+        <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+        {TOPIC_LABEL[entry.data.topic]}
+        <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+        <span class:list={[entry.data.status === 'done' ? 'text-emerald-600' : 'text-amber-600']}>
+          {STATUS_LABEL[entry.data.status]}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3 leading-[1.15]">
+        {entry.data.title}
+      </h1>
+
+      <p class="text-slate-600 text-base leading-relaxed font-medium mb-5">
+        {entry.data.description}
+      </p>
+
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-slate-500 pb-8 border-b border-slate-200">
+        <time datetime={entry.data.date.toISOString().slice(0, 10)}>
+          {entry.data.date.toISOString().slice(0, 10)}
+        </time>
+        {entry.data.tags.length > 0 && (
+          <span class="flex flex-wrap items-center gap-2">
+            {entry.data.tags.map((tag) => (
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
+                #{tag}
+              </span>
+            ))}
+          </span>
+        )}
+      </div>
+    </header>
+
+    <article
+      class="prose prose-slate max-w-none
+        prose-headings:tracking-tight prose-headings:text-slate-900 prose-headings:font-extrabold
+        prose-p:leading-relaxed prose-p:font-medium prose-p:text-slate-700
+        prose-a:text-brand-600 prose-a:font-semibold
+        prose-strong:text-slate-900
+        prose-code:font-mono prose-code:text-xs prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+        prose-pre:bg-slate-950 prose-pre:rounded-xl
+        prose-li:text-slate-700
+        prose-hr:border-slate-200"
+    >
+      <Content />
+    </article>
+
+    <footer class="mt-14 pt-8 border-t border-slate-200">
+      <a
+        href="/learning/"
+        class="inline-flex items-center gap-2 px-5 py-3 rounded-xl glass-pill text-sm font-semibold text-slate-800 hover:bg-white transition-all"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Kembali ke Learning Lab
+      </a>
+    </footer>
+  </main>
+</BaseLayout>

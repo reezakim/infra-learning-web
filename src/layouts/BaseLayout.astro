@@ -49,12 +49,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts — self-hosted, preload biar ga FOUC -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/plus-jakarta-sans-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
 
     <script is:inline type="application/ld+json">
@@ -64,7 +72,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "name": "Reza Hakim Arafah",
         "jobTitle": "Infrastructure Engineer",
         "url": "https://reezakim.my.id/",
-        "image": "https://reezakim.my.id/images/hero-image1.jpg",
+        "image": "https://reezakim.my.id/images/og-image.png",
         "sameAs": [
           "https://github.com/reezakim",
           "https://instagram.com/reezakim",

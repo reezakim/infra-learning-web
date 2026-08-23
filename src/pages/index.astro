@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import heroImage1 from '../assets/hero-image1.jpg';
+import heroImage2 from '../assets/hero-image2.jpg';
 ---
 
 <BaseLayout>
@@ -163,11 +166,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             class="hero-photo hero-photo--tr"
             aria-label="Reza Hakim Arafah"
           >
-            <img
-              src="images/hero-image1.jpg"
+            <Image
+              src={heroImage1}
               alt="Reza Hakim Arafah"
-              width="128"
-              height="128"
+              widths={[168, 296, 444]}
+              sizes="(min-width: 1024px) 128px, 84px"
               loading="eager"
               decoding="async"
               fetchpriority="high"
@@ -207,11 +210,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             class="hero-photo hero-photo--bl"
             aria-label="Reza Hakim Arafah"
           >
-            <img
-              src="images/hero-image2.jpg"
+            <Image
+              src={heroImage2}
               alt="Reza Hakim Arafah"
-              width="148"
-              height="148"
+              widths={[184, 296, 444]}
+              sizes="(min-width: 1024px) 148px, 92px"
               loading="eager"
               decoding="async"
               fetchpriority="low"
@@ -668,7 +671,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div>
             <a
-              href="coming-soon.html?from=linux"
+              href="/coming-soon/linux/"
               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-md group"
             >
               Explore Linux Lab
@@ -747,7 +750,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div>
             <a
-              href="coming-soon.html?from=healthcheck"
+              href="/coming-soon/healthcheck/"
               class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-200/80 text-slate-700 font-mono text-xs font-semibold hover:bg-slate-300/80 transition-colors"
             >
               <span class="w-2 h-2 rounded-full bg-amber-500"></span>

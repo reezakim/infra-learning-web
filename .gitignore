@@ -16,3 +16,4 @@ dist/
 *.log
 images/discussion/PROJECT.md
 legacy/
+public/images/discussion/

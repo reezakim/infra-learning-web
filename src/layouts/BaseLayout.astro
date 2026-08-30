@@ -89,11 +89,49 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </script>
   </head>
   <body
-    class="antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white"
+    class="antialiased min-h-screen bg-[#F7F7F5] dark:bg-[#0D0D0D] text-neutral-900 dark:text-neutral-100 font-sans selection:bg-[#ff3e00] selection:text-white"
   >
     {showNavbar && <Navbar />}
-    <slot />
-    <Footer />
+
+    <!-- Swiss Frame 3-Column Grid Container -->
+    <div class="relative w-full min-h-screen grid grid-cols-1 xl:grid-cols-[64px_1fr_64px] border-x-0 xl:border-x border-[#E0E0DC] dark:border-[#262626] max-w-[1600px] mx-auto pt-14 lg:pt-0">
+      <!-- Left Rail (Sticky Swiss Framing) -->
+      <aside class="hidden xl:flex flex-col items-center justify-between py-12 border-r border-[#E0E0DC] dark:border-[#262626] select-none pointer-events-none sticky top-0 h-screen">
+        <div class="font-mono text-[10px] tracking-[0.25em] uppercase text-neutral-400 dark:text-neutral-500 [writing-mode:vertical-lr] rotate-180">
+          SYS.ID // RHA-INFRA-LAB
+        </div>
+        <div class="w-1.5 h-1.5 bg-[#ff3e00]"></div>
+        <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500 [writing-mode:vertical-lr] rotate-180">
+          SWISS STYLE FRAME // 2026
+        </div>
+      </aside>
+
+      <!-- Center Main Content -->
+      <div class="w-full min-w-0 flex flex-col justify-between">
+        <div class="w-full">
+          <slot />
+        </div>
+        <Footer />
+      </div>
+
+      <!-- Right Rail (Sticky Swiss Metrics/Nav indicator) -->
+      <aside class="hidden xl:flex flex-col items-center justify-between py-12 border-l border-[#E0E0DC] dark:border-[#262626] select-none sticky top-0 h-screen">
+        <div class="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] uppercase text-neutral-400 dark:text-neutral-500 [writing-mode:vertical-lr]">
+          <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full inline-block animate-pulse"></span>
+          SYS.STATUS: ONLINE
+        </div>
+        <nav aria-label="Quick Rail Navigation" class="flex flex-col gap-6 font-mono text-[10px] tracking-[0.2em] uppercase text-neutral-500 dark:text-neutral-400 [writing-mode:vertical-lr]">
+          <a href="/#home" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">HOME</a>
+          <a href="/#about" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">ABOUT</a>
+          <a href="/learning/" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">LABS</a>
+          <a href="/#contact" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">CONTACT</a>
+        </nav>
+        <div class="font-mono text-[10px] tracking-[0.2em] text-neutral-400 dark:text-neutral-500 [writing-mode:vertical-lr]">
+          LAT: 52ms
+        </div>
+      </aside>
+    </div>
+
     <script is:inline src="/js/main.js"></script>
   </body>
 </html>

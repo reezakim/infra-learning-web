@@ -294,7 +294,14 @@
 
     const setOpen = (open) => {
       menuWrap.classList.toggle("is-open", open);
+      menuWrap.classList.toggle("hidden", !open);
       menuBtn.classList.toggle("is-open", open);
+      const iconOpen = menuBtn.querySelector(".menu-icon-open");
+      const iconClose = menuBtn.querySelector(".menu-icon-close");
+      if (iconOpen && iconClose) {
+        iconOpen.classList.toggle("hidden", open);
+        iconClose.classList.toggle("hidden", !open);
+      }
       menuBtn.setAttribute("aria-expanded", String(open));
       menuBtn.setAttribute("aria-label", open ? "Tutup menu navigasi" : "Buka menu navigasi");
     };

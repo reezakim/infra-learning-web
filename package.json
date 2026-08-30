@@ -10,7 +10,7 @@
     "tailwind:build": "npx tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --minify"
   },
   "dependencies": {
-    "@astrojs/node": "^9.5.5",
+    "@astrojs/node": "^11.1.4",
     "@astrojs/react": "^6.0.4",
     "@astrojs/sitemap": "^3.7.3",
     "@keystatic/astro": "^6.0.0",

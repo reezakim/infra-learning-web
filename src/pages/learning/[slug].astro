@@ -13,16 +13,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
-const TOPIC_LABEL = {
+const CATEGORY_LABEL = {
   linux: 'LINUX',
-  network: 'NETWORK',
-  automation: 'AUTOMATION',
-  containerization: 'CONTAINERIZATION',
-};
-
-const STATUS_LABEL = {
-  done: 'DONE',
-  ongoing: 'ONGOING',
+  networking: 'NETWORKING',
+  docker: 'DOCKER',
+  cloud: 'CLOUD',
 };
 ---
 
@@ -40,17 +35,17 @@ const STATUS_LABEL = {
           <li class="text-neutral-300 dark:text-neutral-700">/</li>
           <li><a href="/learning/" class="hover:text-neutral-900 dark:hover:text-white transition-colors">LEARNING_LAB</a></li>
           <li class="text-neutral-300 dark:text-neutral-700">/</li>
-          <li aria-current="page" class="text-[#ff3e00] font-bold">{TOPIC_LABEL[entry.data.topic]}</li>
+          <li aria-current="page" class="text-[#ff3e00] font-bold">{CATEGORY_LABEL[entry.data.category]}</li>
         </ol>
       </nav>
 
       <div class="flex flex-wrap items-center gap-2 sm:gap-3 font-mono text-[11px] sm:text-xs mb-3 sm:mb-4">
         <span class="px-2 py-0.5 border border-[#ff3e00]/30 bg-[#ff3e00]/5 text-[#ff3e00] font-bold uppercase">
-          {TOPIC_LABEL[entry.data.topic]}
+          {CATEGORY_LABEL[entry.data.category]}
         </span>
         <span class="text-neutral-300 dark:text-neutral-700">|</span>
-        <span class:list={[entry.data.status === 'done' ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400', 'font-semibold uppercase']}>
-          STATUS: {STATUS_LABEL[entry.data.status]}
+        <span class:list={[entry.data.featured ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400', 'font-semibold uppercase']}>
+          {entry.data.featured ? 'FEATURED' : 'STANDARD'}
         </span>
       </div>
 
@@ -63,15 +58,9 @@ const STATUS_LABEL = {
       </p>
 
       <div class="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 font-mono text-[11px] sm:text-xs text-neutral-500 pt-4 sm:pt-6 border-t border-[#E0E0DC] dark:border-[#262626]">
-        <span>PUBLISHED: {entry.data.date.toISOString().slice(0, 10)}</span>
-        {entry.data.tags.length > 0 && (
-          <span class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-            {entry.data.tags.map((tag) => (
-              <span class="px-2 py-0.5 border border-[#E0E0DC] dark:border-[#262626] bg-[#F7F7F5] dark:bg-[#0D0D0D] text-neutral-700 dark:text-neutral-300 uppercase">
-                #{tag}
-              </span>
-            ))}
-          </span>
+        <span>PUBLISHED: {entry.data.pubDate.toISOString().slice(0, 10)}</span>
+        {entry.data.featured && (
+          <span class="text-emerald-600 dark:text-emerald-400 font-bold">★ FEATURED</span>
         )}
       </div>
     </div>

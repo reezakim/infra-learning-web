@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import heroImage1 from '../assets/hero-image1.jpg';
-import heroImage2 from '../assets/hero-image2.jpg';
+import heroImage1 from '../assets/hero-image1.webp';
+import heroImage2 from '../assets/hero-image2.webp';
+import topologyImg from '../assets/topology-diagram.webp';
 ---
 
 <BaseLayout
@@ -30,7 +31,8 @@ import heroImage2 from '../assets/hero-image2.jpg';
     </div>
 
     <!-- Hero Header Spread -->
-    <section class="border-b border-[#E0E0DC] dark:border-[#262626] px-4 sm:px-8 lg:px-12 py-10 sm:py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+    <section class="w-full relative flex flex-col justify-between border-b border-[#E0E0DC] dark:border-[#262626] px-4 sm:px-8 lg:px-12 py-10 sm:py-16 lg:py-20 min-h-[calc(100vh-4rem)] max-w-full box-border">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
       <div class="lg:col-span-7 flex flex-col items-start justify-between h-full">
         <div>
           <div class="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs font-semibold tracking-widest text-[#ff3e00] uppercase mb-4 sm:mb-6 border border-[#ff3e00]/30 px-2.5 py-1 bg-[#ff3e00]/5">
@@ -146,44 +148,36 @@ import heroImage2 from '../assets/hero-image2.jpg';
           </div>
         </div>
       </div>
+      </div>
     </section>
 
-    <!-- Interactive Architecture Viewer (ASCII / Topology Map) -->
-    <section class="border-b border-[#E0E0DC] dark:border-[#262626] px-4 sm:px-8 lg:px-12 py-10 sm:py-16 bg-[#F7F7F5] dark:bg-[#0D0D0D]">
+    <!-- Interactive Architecture Viewer (Topology Blueprint) -->
+    <section class="border-t border-b border-[#E0E0DC] dark:border-[#262626] px-4 sm:px-8 lg:px-12 py-10 sm:py-16 bg-[#F7F7F5] dark:bg-[#0D0D0D] w-full max-w-full">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
         <div>
           <span class="font-mono text-[11px] text-[#ff3e00] font-semibold tracking-widest uppercase block mb-1">[01] ARCHITECTURE TOPOLOGY</span>
           <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-tight text-neutral-900 dark:text-white">Homelab Traffic Flow</h2>
         </div>
         <div class="font-mono text-[10px] sm:text-xs text-neutral-500 flex items-center gap-1.5">
-          <span class="inline-block sm:hidden text-[#ff3e00]">← GESER HORIZONTAL →</span>
-          <span class="hidden sm:inline">TYPE: REVERSE_PROXY_INGRESS // ZERO_TRUST_TUNNEL</span>
+          <span>TYPE: REVERSE_PROXY_INGRESS // ZERO_TRUST_TUNNEL</span>
         </div>
       </div>
 
-      <div class="border border-[#E0E0DC] dark:border-[#262626] bg-white dark:bg-[#141414] p-4 sm:p-8 font-mono overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
-        <pre class="text-[11px] sm:text-[13px] leading-relaxed text-neutral-800 dark:text-neutral-200">
-+--------------------+        HTTPS (443)        +--------------------------+
-|  CLIENT / BROWSER  | =========================&gt; |  CLOUDFLARE EDGE DNS/WAF |
-+--------------------+                            +--------------------------+
-                                                               ||
-                                                       TUNNEL / PROXY PASS
-                                                               \/
-+-----------------------------------------------------------------------------------------+
-| HOMELAB HOST: ubuntu-server-01 (192.168.1.100)                                          |
-|                                                                                         |
-|  +-----------------------------------------------------------------------------------+  |
-|  | NGINX REVERSE PROXY (SSL Termination, Rate Limiting, Header Hardening)             |  |
-|  +-----------------------------------------------------------------------------------+  |
-|         |                                      |                                  |     |
-|         v                                      v                                  v     |
-|  +-------------------+               +-------------------+              +------------+  |
-|  | DOCKER: GITEA     |               | DOCKER: ADGUARD   |              | DOCS / LAB |  |
-|  | (Git Repo Server) |               | (DNS Sinkhole)    |              | (Astro SSG)|  |
-|  | Port: :3000       |               | Port: :53/:3001   |              | Port: :4321|  |
-|  +-------------------+               +-------------------+              +------------+  |
-+-----------------------------------------------------------------------------------------+
-        </pre>
+      <div class="border border-[#E0E0DC] dark:border-[#262626] p-2 sm:p-4 bg-white dark:bg-[#141414] overflow-hidden">
+        <div class="flex justify-between items-center mb-3 border-b border-[#E0E0DC] dark:border-[#262626] pb-2 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-neutral-500">
+          <span>[FIG. 01] PRODUCTION HOMELAB TOPOLOGY</span>
+          <span class="inline-flex items-center gap-1.5 text-emerald-500 font-semibold">
+            <span class="w-1.5 h-1.5 bg-emerald-500 inline-block animate-pulse"></span>
+            STATUS: ACTIVE
+          </span>
+        </div>
+        <Image 
+          src={topologyImg} 
+          alt="Homelab Architecture Topology Blueprint" 
+          format="webp" 
+          loading="lazy"
+          class="w-full h-auto object-contain max-h-[550px] border border-[#E0E0DC]/60 dark:border-[#262626]"
+        />
       </div>
     </section>
 

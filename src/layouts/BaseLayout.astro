@@ -19,7 +19,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full max-w-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,14 +89,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </script>
   </head>
   <body
-    class="antialiased min-h-screen bg-[#F7F7F5] dark:bg-[#0D0D0D] text-neutral-900 dark:text-neutral-100 font-sans selection:bg-[#ff3e00] selection:text-white"
+    class="antialiased min-h-screen overflow-x-hidden w-full max-w-full bg-[#F7F7F5] dark:bg-[#0D0D0D] text-neutral-900 dark:text-neutral-100 font-sans selection:bg-[#ff3e00] selection:text-white"
   >
     {showNavbar && <Navbar />}
 
     <!-- Swiss Frame 3-Column Grid Container -->
-    <div class="relative w-full min-h-screen grid grid-cols-1 xl:grid-cols-[64px_1fr_64px] border-x-0 xl:border-x border-[#E0E0DC] dark:border-[#262626] max-w-[1600px] mx-auto pt-14 lg:pt-0">
+    <div class="relative w-full max-w-full xl:max-w-[1600px] min-h-screen grid grid-cols-1 xl:grid-cols-[64px_1fr_64px] border-x-0 xl:border-x border-[#E0E0DC] dark:border-[#262626] mx-auto pt-14 lg:pt-0 overflow-x-hidden">
       <!-- Left Rail (Sticky Swiss Framing) -->
-      <aside class="hidden xl:flex flex-col items-center justify-between py-12 border-r border-[#E0E0DC] dark:border-[#262626] select-none pointer-events-none sticky top-0 h-screen">
+      <aside class="hidden xl:flex shrink-0 flex-col items-center justify-between py-12 border-r border-[#E0E0DC] dark:border-[#262626] select-none pointer-events-none sticky top-0 h-screen overflow-hidden">
         <div class="font-mono text-[10px] tracking-[0.25em] uppercase text-neutral-400 dark:text-neutral-500 [writing-mode:vertical-lr] rotate-180">
           SYS.ID // RHA-INFRA-LAB
         </div>
@@ -107,7 +107,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </aside>
 
       <!-- Center Main Content -->
-      <div class="w-full min-w-0 flex flex-col justify-between">
+      <div class="w-full min-w-0 max-w-full flex flex-col justify-between overflow-x-hidden">
         <div class="w-full">
           <slot />
         </div>
@@ -115,15 +115,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </div>
 
       <!-- Right Rail (Sticky Swiss Metrics/Nav indicator) -->
-      <aside class="hidden xl:flex flex-col items-center justify-between py-12 border-l border-[#E0E0DC] dark:border-[#262626] select-none sticky top-0 h-screen">
+      <aside class="hidden xl:flex shrink-0 flex-col items-center justify-between py-12 border-l border-[#E0E0DC] dark:border-[#262626] select-none sticky top-0 h-screen overflow-hidden">
         <div class="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] uppercase text-neutral-400 dark:text-neutral-500 [writing-mode:vertical-lr]">
           <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full inline-block animate-pulse"></span>
           SYS.STATUS: ONLINE
         </div>
         <nav aria-label="Quick Rail Navigation" class="flex flex-col gap-6 font-mono text-[10px] tracking-[0.2em] uppercase text-neutral-500 dark:text-neutral-400 [writing-mode:vertical-lr]">
           <a href="/#home" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">HOME</a>
-          <a href="/#about" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">ABOUT</a>
           <a href="/learning/" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">LABS</a>
+          <a href="/#about" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">ABOUT</a>
           <a href="/#contact" class="hover:text-[#ff3e00] dark:hover:text-[#ff3e00] transition-colors">CONTACT</a>
         </nav>
         <div class="font-mono text-[10px] tracking-[0.2em] text-neutral-400 dark:text-neutral-500 [writing-mode:vertical-lr]">

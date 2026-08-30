@@ -10,16 +10,24 @@
     "tailwind:build": "npx tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --minify"
   },
   "dependencies": {
+    "@astrojs/node": "^9.5.5",
+    "@astrojs/react": "^6.0.4",
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^5.1.1"
+    "@keystatic/astro": "^6.0.0",
+    "@keystatic/core": "^0.6.9",
+    "astro": "^7.2.9",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^22.10.2",
     "autoprefixer": "^10.4.20",
     "playwright": "^1.62.1",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.3"
   },
   "allowScripts": {
     "esbuild@0.27.7": true,

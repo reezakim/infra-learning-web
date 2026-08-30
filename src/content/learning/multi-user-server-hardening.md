@@ -1,10 +1,9 @@
 ---
 title: "Multi-User Server Hardening"
-topic: linux
-date: 2026-08-22
-status: ongoing
-tags: [systemd, ssh, nginx]
 description: "Setup server multi-user untuk lab belajar: manajemen user, hardening SSH, dan firewall UFW."
+category: linux
+pubDate: 2026-08-22
+featured: false
 ---
 
 ## Ringkasan
